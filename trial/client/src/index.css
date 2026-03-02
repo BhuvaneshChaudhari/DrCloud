@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-image: url('./assets/cloud-bg.jpeg'); /* your image */
+  background-size: cover;        /* fills full screen */
+  background-position: center;   /* centers image */
+  background-repeat: no-repeat;  /* no repeating */
+  background-attachment: fixed;  /* premium scroll effect */
+
+  @apply text-slate-900 antialiased;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Segoe UI', sans-serif;
+}
+
+.drcloud-container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.drcloud-card {
+  @apply rounded-3xl bg-white/90 shadow-soft backdrop-blur-sm border border-white/60;
+}
+
+.drcloud-pill-button {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-colors;
+}
+
+.drcloud-pill-primary {
+  @apply drcloud-pill-button bg-drcloudYellow text-slate-900 hover:bg-yellow-400;
+}
+
+.drcloud-pill-outline {
+  @apply drcloud-pill-button border border-white/60 bg-white/40 text-drcloudBlue hover:bg-white;
+}
+
+.chatbot-bubble {
+  @apply rounded-2xl px-4 py-3 text-sm max-w-xs shadow-soft;
+}
+
+.chatbot-bubble-user {
+  @apply chatbot-bubble bg-drcloudBlue text-white self-end;
+}
+
+.chatbot-bubble-bot {
+  @apply chatbot-bubble bg-white/95 text-slate-900 self-start;
+}
+
