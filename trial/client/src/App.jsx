@@ -1,4 +1,5 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Chatbot from './components/Chatbot.jsx';
@@ -8,10 +9,27 @@ import CloudServices from './pages/CloudServices.jsx';
 import OtherServices from './pages/OtherServices.jsx';
 import Enquiry from './pages/Enquiry.jsx';
 
+// helper to scroll to top on navigation and on mount
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  useEffect(() => {
+    // Scroll to top on initial mount
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return null;
+};
+
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      <ScrollToTop />
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />

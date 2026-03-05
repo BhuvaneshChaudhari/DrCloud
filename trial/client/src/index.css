@@ -25,7 +25,7 @@ body {
 }
 
 .drcloud-card {
-  @apply rounded-3xl bg-white/90 shadow-soft backdrop-blur-sm border border-white/60;
+  @apply rounded-2xl bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 transition duration-300 hover:bg-white/20 hover:shadow-2xl;
 }
 
 .drcloud-pill-button {
@@ -46,6 +46,21 @@ body {
 
 .chatbot-bubble-user {
   @apply chatbot-bubble bg-drcloudBlue text-white self-end;
+}
+
+@keyframes slideIn {
+  from {
+    background-color: transparent;
+    transform: translateX(-10px);
+  }
+  to {
+    background-color: rgb(224, 242, 254);
+    transform: translateX(0);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-in-out forwards;
 }
 
 .chatbot-bubble-bot {
