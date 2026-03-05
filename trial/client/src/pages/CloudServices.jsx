@@ -27,11 +27,12 @@ const CloudCard = ({ title, description, bullets }) => {
 const CloudServices = () => {
   return (
     <div className="drcloud-container py-10 md:py-14">
-      <div className="text-center space-y-2 mb-8">
-        <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
-          Cloud Based Services
+      <div className="text-center space-y-12 mb-8">
+        <h2 className="text-4xl md:text-5xl font-bold">
+          <span className="text-slate-900">Cloud Based </span>
+          <span className="text-drcloudBlue">Services</span>
         </h2>
-        <p className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto">
+        <p className="text-sm md:text-xl text-slate-600 max-w-2xl mx-auto">
           We offer advanced and secure cloud computing solutions tailored to
           your needs. Our services include scalable IaaS, PaaS, and SaaS,
           enabling enhanced operations, performance, and seamless scalability.

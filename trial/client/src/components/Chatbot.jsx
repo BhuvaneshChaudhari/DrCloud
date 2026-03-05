@@ -1,26 +1,30 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import cloudBg from "../assets/cloud-bg.jpeg";
+import drlogo from "../assets/drlogo1.png";
+import robot from "../assets/robot.jpg";
 
 const quickReplies = [
   { id: 'browse', label: 'Browse Courses' },
   { id: 'support', label: 'Ask About Support' },
   { id: 'contact', label: 'Contact Us' }
 ];
+const defaultMessages = [
+  {
+    id: 'welcome',
+    from: 'bot',
+    text: 'Hello! 👋 How can we assist you today?'
+  },
+  {
+    id: 'hint',
+    from: 'bot',
+    text: 'You can browse our courses, ask about support, or contact us directly.'
+  }
+];
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 'welcome',
-      from: 'bot',
-      text: 'Hello! 👋 How can we assist you today?'
-    },
-    {
-      id: 'hint',
-      from: 'bot',
-      text: 'You can browse our courses, ask about support, or contact us directly.'
-    }
-  ]);
+  const [messages, setMessages] = useState([...defaultMessages]);
   const navigate = useNavigate();
 
   const responseMap = useMemo(
@@ -61,7 +65,15 @@ const Chatbot = () => {
     ]);
 
     if (config.navigateTo) {
-      navigate(config.navigateTo);
+      setTimeout(() => {
+        if (config.navigateTo.startsWith('#')) {
+          const section = document.querySelector(config.navigateTo);
+          section?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          navigate(config.navigateTo);
+          window.scrollTo(0, 0);
+        }
+      }, 1000);
     }
   };
 
@@ -77,17 +89,27 @@ const Chatbot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-5 z-40 w-80 max-w-[90vw] drcloud-card flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
-            <div>
-              <div className="text-sm font-semibold text-slate-900">
-                DrCloud Assistant
-              </div>
-              <div className="text-[11px] text-emerald-500">Online · Instant replies</div>
-            </div>
+        <div
+          className="fixed bottom-10 right-5 z-40 w-[420px] h-[560px] max-w-[95vw] flex flex-col rounded-3xl overflow-hidden shadow-2xl"
+          style={{
+            backgroundImage: `url(${cloudBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        >
+          <div className="flex items-center justify-between px-4 h-[70px] border-b border-slate-100">
+            <img
+              src={drlogo}
+              alt="DrCloud"
+              className="h-20 object-contain"
+            />
+
             <button
               type="button"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setMessages([...defaultMessages]);
+              }}
               className="text-slate-400 hover:text-slate-500 text-lg"
               aria-label="Close chatbot"
             >
@@ -95,12 +117,20 @@ const Chatbot = () => {
             </button>
           </div>
 
-          <div className="flex-1 px-3 py-3 space-y-2 overflow-y-auto max-h-80 bg-sky-50/60">
+          <div className="flex-1 px-4 py-4 space-y-3 overflow-y-auto bg-transparent">
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex items-start gap-2 ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
               >
+                {msg.from === 'bot' && (
+                  <img
+                    src={robot}
+                    alt="bot"
+                    className="w-9 h-9 object-contain mt-1"
+                  />
+                )}
+
                 <div
                   className={
                     msg.from === 'user'
@@ -112,21 +142,28 @@ const Chatbot = () => {
                 </div>
               </div>
             ))}
-          </div>
+            {messages[messages.length - 1]?.from === 'bot' && (
+              <div className="flex items-start gap-2 mt-2">
+                <img
+                  src={robot}
+                  alt="bot"
+                  className="w-9 h-9 object-contain mt-1"
+                />
 
-          <div className="px-3 pb-3 pt-1 border-t border-slate-100 bg-white/70">
-            <div className="flex flex-wrap gap-2">
-              {quickReplies.map((qr) => (
-                <button
-                  key={qr.id}
-                  type="button"
-                  onClick={() => handleQuickReply(qr.id)}
-                  className="text-xs px-3 py-1.5 rounded-full bg-sky-100 text-drcloudBlue font-medium hover:bg-sky-200"
-                >
-                  {qr.label}
-                </button>
-              ))}
-            </div>
+                <div className="flex flex-col gap-3">
+                  {quickReplies.map((qr) => (
+                    <button
+                      key={qr.id}
+                      type="button"
+                      onClick={() => handleQuickReply(qr.id)}
+                      className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-400 text-white text-sm shadow hover:scale-105 transition w-fit"
+                    >
+                      {qr.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -135,4 +172,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
