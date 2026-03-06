@@ -10,7 +10,11 @@ const CloudCard = ({ icon, title, description, bullets }) => {
 
       {/* ICON */}
       <div className="flex justify-center mb-0.5">
-        <img src={icon} alt={title} className="w-16 h-16 object-contain" />
+        <img
+          src={icon}
+          alt={title}
+          className={`object-contain ${title === "DevOps" ? "w-20 h-20" : "w-16 h-16"}`}
+        />
       </div>
 
       <div className="flex-1">
