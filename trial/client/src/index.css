@@ -67,3 +67,22 @@ body {
   @apply chatbot-bubble bg-white/95 text-slate-900 self-start;
 }
 
+/* rocket launch */
+@keyframes rocketLaunch {
+  0% {
+    transform: translate(120px, 120px) rotate(-35deg);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(-35deg);
+  }
+}
+
+.rocket-launch {
+  animation: rocketLaunch 1.6s ease-out forwards;
+}
