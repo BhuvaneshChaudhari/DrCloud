@@ -1,12 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cloudBg from "../assets/cloud-bg.jpeg";
 import drlogo from "../assets/drlogo1.png";
 import robot from "../assets/robot.jpg";
 
 const quickReplies = [
-  { id: 'browse', label: 'Browse Courses' },
-  { id: 'support', label: 'Ask About Support' },
+  { id: 'services', label: 'Browse Services' },
+  { id: 'enquiry', label: 'Enquiry Page' },
   { id: 'contact', label: 'Contact Us' }
 ];
 const defaultMessages = [
@@ -18,30 +18,40 @@ const defaultMessages = [
   {
     id: 'hint',
     from: 'bot',
-    text: 'You can browse our courses, ask about support, or contact us directly.'
+    text: 'You can browse our services, submit an enquiry, or contact us directly.'
   }
 ];
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([...defaultMessages]);
+  const [serviceOptions, setServiceOptions] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [lastSelected, setLastSelected] = useState(null);
   const navigate = useNavigate();
+
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, serviceOptions]);
 
   const responseMap = useMemo(
     () => ({
-      browse: {
+      services: {
         text:
-          'You can explore all our cloud and DevOps courses on the Training page. I recommend starting with AWS, Azure, or our DevOps Bootcamp. When you are ready, click Get Started to send us an enquiry.',
-        navigateTo: '/training'
+          'We offer multiple services including training, cloud solutions, and other IT services. Please choose the service you are interested in.',
+        navigateTo: '/services'
       },
-      support: {
+
+      enquiry: {
         text:
-          'Our support team is available to help with course selection, onboarding, and technical questions. Please fill out the enquiry form and we will get back to you shortly.',
+          'You can submit your details on our enquiry page and our team will contact you shortly.',
         navigateTo: '/enquiry'
       },
       contact: {
         text:
-          'You can reach us using the contact information on the Contact page or by submitting the enquiry form. Click Get Started to share your details.',
+          'You can reach us using the contact information on the Contact page or by submitting the enquiry form.',
         navigateTo: '/contact'
       }
     }),
@@ -52,36 +62,68 @@ const Chatbot = () => {
     const config = responseMap[id];
     if (!config) return;
 
-    setMessages((prev) => [
+    const time = Date.now();
+
+    setMessages(prev => [
       ...prev,
-      { id: `user-${Date.now()}`, from: 'user', text: quickReplies.find((q) => q.id === id)?.label ?? '' },
-      { id: `bot-${Date.now()}`, from: 'bot', text: config.text },
-      {
-        id: `bot-cta-${Date.now()}`,
-        from: 'bot',
-        text:
-          'Whenever you are ready, click the Get Started button to send us your enquiry and our team will reach out.'
-      }
+      { id: `user-${time}`, from: "user", text: quickReplies.find(q => q.id === id)?.label ?? "" }
     ]);
 
-    if (config.navigateTo) {
-      setTimeout(() => {
-        if (config.navigateTo.startsWith('#')) {
-          const section = document.querySelector(config.navigateTo);
-          section?.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          navigate(config.navigateTo);
-          window.scrollTo(0, 0);
-        }
-      }, 1000);
-    }
+    setIsTyping(true);
+
+    setTimeout(() => {
+
+      setMessages(prev => [
+        ...prev,
+        { id: `bot-${Date.now()}`, from: "bot", text: config.text }
+      ]);
+
+      setLastSelected(id);
+
+      // 👇 MOVE IT HERE
+      if (id === "services") {
+        setServiceOptions([
+          {
+            id: "courses",
+            label: "Our Courses",
+            navigateTo: "/training",
+            text: "Explore our industry-focused training programs including AWS, Azure, DevOps, and more designed to help you build strong cloud skills."
+          },
+          {
+            id: "cloud",
+            label: "Cloud Services",
+            navigateTo: "/cloud-services",
+            text: "Our cloud services help businesses migrate, manage, and optimize their infrastructure using modern cloud platforms."
+          },
+          {
+            id: "other",
+            label: "Other Services",
+            navigateTo: "/other-services",
+            text: "We also provide additional IT and consulting services to support organizations in their digital transformation journey."
+          }
+        ]);
+      }
+
+      if (config.navigateTo) {
+        navigate(config.navigateTo);
+      }
+
+      setIsTyping(false);
+
+    }, 1000);
+
   };
 
   return (
     <>
       <button
         type="button"
-        onClick={() => setIsOpen((v) => !v)}
+        onClick={() => {
+          setIsOpen((v) => !v);
+          setMessages([...defaultMessages]);
+          setServiceOptions([]);
+          setLastSelected(null);
+        }}
         className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-drcloudBlue to-sky-400 shadow-soft flex items-center justify-center text-white"
         aria-label="Open DrCloud Chatbot"
       >
@@ -90,7 +132,7 @@ const Chatbot = () => {
 
       {isOpen && (
         <div
-          className="fixed bottom-10 right-5 z-40 w-[420px] h-[560px] max-w-[95vw] flex flex-col rounded-3xl overflow-hidden shadow-2xl"
+          className="fixed bottom-10 right-5 z-40 w-[340px] h-[480px] max-w-[95vw] flex flex-col rounded-3xl overflow-hidden shadow-2xl"
           style={{
             backgroundImage: `url(${cloudBg})`,
             backgroundSize: "cover",
@@ -109,6 +151,8 @@ const Chatbot = () => {
               onClick={() => {
                 setIsOpen(false);
                 setMessages([...defaultMessages]);
+                setServiceOptions([]);
+                setLastSelected(null);
               }}
               className="text-slate-400 hover:text-slate-500 text-lg"
               aria-label="Close chatbot"
@@ -142,7 +186,22 @@ const Chatbot = () => {
                 </div>
               </div>
             ))}
-            {messages[messages.length - 1]?.from === 'bot' && (
+              
+              {isTyping && (
+                <div className="flex items-start gap-2">
+                  <img
+                    src={robot}
+                    alt="bot"
+                    className="w-9 h-9 object-contain mt-1"
+                  />
+                  <div className="chatbot-bubble-bot flex gap-1 items-center">
+                    <span className="typing-dot"></span>
+                    <span className="typing-dot"></span>
+                    <span className="typing-dot"></span>
+                  </div>
+                </div>
+              )}
+            {messages[messages.length - 1]?.from === 'bot' && serviceOptions.length === 0 && !isTyping && (
               <div className="flex items-start gap-2 mt-2">
                 <img
                   src={robot}
@@ -151,7 +210,9 @@ const Chatbot = () => {
                 />
 
                 <div className="flex flex-col gap-3">
-                  {quickReplies.map((qr) => (
+                  {quickReplies
+                    .filter(qr => qr.id !== lastSelected)
+                    .map((qr) => (
                     <button
                       key={qr.id}
                       type="button"
@@ -164,6 +225,70 @@ const Chatbot = () => {
                 </div>
               </div>
             )}
+            {serviceOptions.length > 0 && !isTyping && (
+              <div className="flex items-start gap-2 mt-2">
+                <img
+                  src={robot}
+                  alt="bot"
+                  className="w-9 h-9 object-contain mt-1"
+                />
+
+                <div className="flex flex-col gap-3">
+
+                  {serviceOptions
+                    .filter(option => option.id !== lastSelected)
+                    .map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => {
+
+                        const time = Date.now();
+
+                        setMessages(prev => [
+                          ...prev,
+                          { id: `user-${time}`, from: "user", text: option.label }
+                        ]);
+                      
+                        setIsTyping(true);
+
+                        setTimeout(() => {
+
+                          setMessages(prev => [
+                            ...prev,
+                            { id: `bot-${Date.now()}`, from: "bot", text: option.text }
+                          ]);
+
+                          setLastSelected(option.id);
+
+                          setIsTyping(false);
+
+                          navigate(option.navigateTo);
+
+                        }, 1000);
+
+                      }}
+                      className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-400 text-white text-sm shadow hover:scale-105 transition w-fit"
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setServiceOptions([]);
+                      setLastSelected(null);
+                    }}
+                    className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-400 text-white text-sm shadow hover:scale-105 transition w-fit"
+                  >
+                    ⬅ Back
+                  </button>
+
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef}></div>
           </div>
         </div>
       )}
