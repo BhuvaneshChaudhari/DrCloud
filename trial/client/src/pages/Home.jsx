@@ -133,10 +133,10 @@ const Home = () => {
 
           {/* Rocket tilted above laptop left corner */}
           <img
-            src={rocketImg}
-            alt="Rocket"
-            className="absolute -top-10 right-[420px] w-20 md:w-23 rotate-[-35deg] z-20"
-          />
+          src={rocketImg}
+          alt="Rocket"
+          className="absolute -top-10 right-[420px] w-20 md:w-23 rotate-[-35deg] z-20 rocket-launch"
+        />
 
         </div>
 
