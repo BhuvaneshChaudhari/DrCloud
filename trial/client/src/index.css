@@ -67,6 +67,32 @@ body {
   @apply chatbot-bubble bg-white/95 text-slate-900 self-start;
 }
 
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #9ca3af;
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+
 /* rocket launch */
 @keyframes rocketLaunch {
   0% {
@@ -86,3 +112,4 @@ body {
 .rocket-launch {
   animation: rocketLaunch 1.6s ease-out forwards;
 }
+
