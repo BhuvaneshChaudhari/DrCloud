@@ -23,7 +23,7 @@ const defaultMessages = [
 ];
 
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [messages, setMessages] = useState([...defaultMessages]);
   const [serviceOptions, setServiceOptions] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -124,10 +124,14 @@ const Chatbot = () => {
           setServiceOptions([]);
           setLastSelected(null);
         }}
-        className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-drcloudBlue to-sky-400 shadow-soft flex items-center justify-center text-white"
+        className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-drcloudBlue to-sky-400 shadow-soft flex items-center justify-center text-white overflow-hidden"
         aria-label="Open DrCloud Chatbot"
       >
-        <span className="text-2xl">💬</span>
+        <img
+          src={robot}
+          alt="DrCloud Chatbot"
+          className="w-full h-full object-cover"
+        />
       </button>
 
       {isOpen && (

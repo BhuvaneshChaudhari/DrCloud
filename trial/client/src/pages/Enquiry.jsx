@@ -14,6 +14,7 @@ const Enquiry = () => {
   const [form, setForm] = useState(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,16 +35,73 @@ const Enquiry = () => {
         message: form.message
       };
       await apiClient.post('/api/enquiry', payload);
-      setStatus({ type: 'success', message: 'Thank you! Your enquiry has been submitted.' });
+      setStatus({ type: 'success', message: 'Thank you! Your enquiry has been submitted. We\'ll get back to you soon.' });
+      setShowModal(true);
       setForm(initialState);
+      
+      // Auto close modal after 5 seconds
+      setTimeout(() => setShowModal(false), 5000);
     } catch (error) {
       const message =
         error.response?.data?.message ||
         'Something went wrong while submitting your enquiry. Please try again.';
       setStatus({ type: 'error', message });
+      setShowModal(true);
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // Modal Component
+  const SubmissionModal = () => {
+    if (!showModal || !status) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full animate-slideUp">
+          <div className="p-8 text-center">
+            {status.type === 'success' ? (
+              <>
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-emerald-600 animate-checkmark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Submitted!</h3>
+                <p className="text-slate-600 mb-6">
+                  {status.message}
+                </p>
+                <p className="text-sm text-slate-500 mb-6">
+                  Our team will contact you within 24 hours to discuss your learning goals.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="mb-4 flex justify-center">
+                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Oops!</h3>
+                <p className="text-slate-600 mb-6">
+                  {status.message}
+                </p>
+              </>
+            )}
+            <button
+              onClick={() => setShowModal(false)}
+              className="drcloud-pill-primary text-sm w-full"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -124,7 +182,7 @@ const Enquiry = () => {
               value={form.serviceType}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-drcloudBlue/40"
+              className="enquiry-select w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-drcloudBlue/40"
             >
               <option value="">Select a service</option>
               <option value="AWS">AWS</option>
@@ -155,18 +213,6 @@ const Enquiry = () => {
             />
           </div>
 
-          {status && (
-            <div
-              className={`text-xs rounded-xl px-3 py-2 ${
-                status.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
-                  : 'bg-red-50 text-red-700 border border-red-100'
-              }`}
-            >
-              {status.message}
-            </div>
-          )}
-
           <button
             type="submit"
             disabled={submitting}
@@ -175,6 +221,8 @@ const Enquiry = () => {
             {submitting ? 'Submitting...' : 'Submit'}
           </button>
         </form>
+
+        <SubmissionModal />
       </section>
 
       <section className="space-y-4">

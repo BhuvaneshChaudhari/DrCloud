@@ -21,14 +21,14 @@ const StatCard = ({ label, value }) => (
 );
 
 const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon }) => (
-  <div className="drcloud-card px-6 py-7 flex flex-col h-full">
+  <div className="drcloud-card px-6 py-7 flex flex-col h-full fade-in">
     <div className="flex flex-col items-center text-center gap-2">
       <img
         src={icon}
         alt={title}
         className="w-14 h-14 object-contain"
       />
-      <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+      <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">{title}</h3>
     </div>
     <p className="text-sm text-slate-600">{description}</p>
     <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
@@ -57,7 +57,7 @@ const PILLARS = [
 
 const TESTIMONIALS = [
   { name: 'Atharva Gawali', company: 'Johnson Controls Placement', quote: "DrCloud's expert training and placement support helped me land a position at Johnson Controls, a global leader in smart building technologies and automation. The hands-on skills, mentorship, and industry connections gave me the confidence to excel at interviews and adapt quickly in my professional role. I am grateful to the entire Dr Cloud team for turning my career aspirations into reality." },
-  { name: 'Raunak', company: 'TalenIQ Placement', quote: "Dr Cloudʼs practical cloud and DevOps training made a real difference in my career journey. Thanks to expert guidance and focused placement support, I was placed at Talenio, a fast-growing company redefining employability training and tech solutions. The curriculum, real-world projects, and dedicated team at Dr Cloud gave me the confidence and clarity to succeed professionally. I truly appreciate their commitment to every studentʼs future." },
+  { name: 'Raunak', company: 'Talenlio Placement', quote: "Dr Cloudʼs practical cloud and DevOps training made a real difference in my career journey. Thanks to expert guidance and focused placement support, I was placed at Talenio, a fast-growing company redefining employability training and tech solutions. The curriculum, real-world projects, and dedicated team at Dr Cloud gave me the confidence and clarity to succeed professionally. I truly appreciate their commitment to every studentʼs future." },
   { name: 'Trupti Wankhede', company: 'Johnson Controls Placement', quote: "Thanks to Dr Cloudʼs comprehensive training and dedicated placement support, I secured my role at Johnson Controls, a global leader in smart building technologies and sustainable solutions. The real-world skills and personalized guidance prepared me well for the professional challenges I face today. Dr Cloud truly transforms learning into career success.." }
 ];
 
@@ -100,7 +100,7 @@ const Home = () => {
             <button
               type="button"
               onClick={() => navigate('/enquiry')}
-              className="drcloud-pill-primary text-sm !text-white"
+              className="drcloud-pill-primary text-sm"
             >
               Start Learning Today
             </button> 
@@ -220,10 +220,10 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 justify-items-center">
-          {PILLARS.map((p) => (
+          {PILLARS.map((p, index) => (
             <div
               key={p.title}
-              className="w-[250px] h-[250px] flex flex-col items-center justify-center text-center rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 p-6 transition duration-300 hover:bg-white/20 hover:shadow-2xl"
+              className={`pillar-box w-[250px] h-[250px] flex flex-col items-center justify-center text-center rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 p-6 fade-in`}
             >
               <img src={p.icon} alt={p.title} className="w-12 h-12 mb-3 object-contain" />
               <h3 className="text-lg md:text-xl font-semibold text-slate-900">{p.title}</h3>
@@ -244,8 +244,8 @@ const Home = () => {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="drcloud-card px-8 py-12 flex flex-col justify-between">
+            {TESTIMONIALS.map((t, index) => (
+              <div key={t.name} className={`drcloud-card px-8 py-12 flex flex-col justify-between fade-in`}>
                 <p className="text-sm text-slate-600 mb-4">{t.quote}</p>
                 <div className="mt-auto">
                   <div className="text-sm font-semibold text-slate-900">{t.name}</div>
@@ -305,7 +305,7 @@ const Home = () => {
               <button
                 type="button"
                 onClick={() => navigate('/enquiry')}
-                className="drcloud-pill-primary text-sm !text-white"
+                className="drcloud-pill-primary text-sm"
               >
                 Open Enquiry Form
               </button>

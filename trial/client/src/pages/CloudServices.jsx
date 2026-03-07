@@ -6,7 +6,7 @@ import bigDataIcon from '../assets/big_data.png';
 
 const CloudCard = ({ icon, title, description, bullets }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80">
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 fade-in">
 
       {/* ICON */}
       <div className="flex justify-center mb-0.5">
@@ -22,7 +22,7 @@ const CloudCard = ({ icon, title, description, bullets }) => {
           {title}
         </h3>
 
-        <p className="text-sm text-slate-600 mb-4 text-center">
+        <p className="text-sm text-slate-600 mb-4">
           {description}
         </p>
 

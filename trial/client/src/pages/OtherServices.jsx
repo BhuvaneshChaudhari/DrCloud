@@ -10,10 +10,10 @@ import communityNetworking from "../assets/community-networking.png";
 
 const OtherCard = ({ icon, title, description, bullets }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-1 flex flex-col justify-between text-center">
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 fade-in">
 
       {/* Icon */}
-      <div className="flex justify-center mb-1">
+      <div className="flex justify-center mb-0.5">
         <img
           src={icon}
           alt={title}
@@ -21,22 +21,24 @@ const OtherCard = ({ icon, title, description, bullets }) => {
         />
       </div>
 
-      {/* Title */}
-      <h3 className="text-lg font-semibold text-slate-900">
-        {title}
-      </h3>
+      <div className="flex-1">
+        {/* Title */}
+        <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">
+          {title}
+        </h3>
 
-      {/* Description */}
-      <p className="text-sm text-slate-600">
-        {description}
-      </p>
+        {/* Description */}
+        <p className="text-sm text-slate-600 mb-4">
+          {description}
+        </p>
 
-      {/* Bullet Points */}
-      <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 text-left">
-        {bullets.map((b, index) => (
-          <li key={index}>{b}</li>
-        ))}
-      </ul>
+        {/* Bullet Points */}
+        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+          {bullets.map((b, index) => (
+            <li key={index}>{b}</li>
+          ))}
+        </ul>
+      </div>
 
     </div>
   );
@@ -133,14 +135,15 @@ const OtherServices = () => {
       </div>
 
       {/* Button Section */}
-      <div className="text-center mt-12">
-        <p className="text-slate-800 text-lg md:text-xl font-medium mb-6">
-          To know more about courses, click below
+      <div className="text-center mt-12 space-y-4">
+        <p className="text-base md:text-2xl text-slate-600">
+          To know more about services, click below
         </p>
 
         <button
+          type="button"
           onClick={() => navigate("/enquiry")}
-          className="drcloud-pill-primary text-sm px-6 py-2"
+          className="drcloud-pill-primary text-sm !bg-yellow-500 !text-white"
         >
           Get Started
         </button>

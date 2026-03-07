@@ -9,7 +9,7 @@ import csrIcon from "../assets/csr-icon.png";
 
 const TrainingCard = ({ icon, title, description, bullets }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80">
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 fade-in">
       <div className="flex-1">
         <img src={icon} alt={title} className="w-18 h-16 mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-slate-900 mb-1 text-center">{title}</h3>
