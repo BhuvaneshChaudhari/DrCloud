@@ -21,7 +21,7 @@ const StatCard = ({ label, value }) => (
 );
 
 const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon }) => (
-  <div className="drcloud-card px-6 py-7 flex flex-col h-full fade-in">
+  <div className="drcloud-card px-6 py-5 flex flex-col h-full fade-in">
     <div className="flex flex-col items-center text-center gap-2">
       <img
         src={icon}
@@ -107,7 +107,7 @@ const Home = () => {
             <button
               type="button"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-200"
+              className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 transition duration-200"
             >
               View Our Services
             </button>

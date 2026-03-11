@@ -1,4 +1,5 @@
 import footerLogo from '../assets/drlogo.png';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -36,15 +37,18 @@ const Footer = () => {
 
         <div>
           <h3 className="font-semibold text-slate-900 mb-3 text-base">
-            Our Courses
+            Our Services
           </h3>
           <ul className="space-y-1 text-base text-slate-600">
-            <li>AWS</li>
-            <li>Azure</li>
-            <li>Cloud Computing Services (GCP)</li>
-            <li>Docker and Kubernetes</li>
-            <li>DevOps Bootcamp</li>
-            <li>Infrastructure as Code</li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">AWS</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">Azure</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">Cloud Computing Services (GCP)</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">Docker and Kubernetes</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">DevOps Bootcamp</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">Infrastructure as Code</Link></li>
+            <li><Link to="/training" className="hover:text-slate-900 hover:underline">CSR based Trainings</Link></li>
+            <li><Link to="/cloud-services" className="hover:text-slate-900 hover:underline">Cloud Services</Link></li>
+            <li><Link to="/other-services" className="hover:text-slate-900 hover:underline">Other Services</Link></li>
           </ul>
         </div>
 
@@ -57,7 +61,7 @@ const Footer = () => {
               <svg className="w-4 h-4 text-slate-700" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2 6.75A2.75 2.75 0 014.75 4h14.5A2.75 2.75 0 0122 6.75v10.5A2.75 2.75 0 0119.25 20H4.75A2.75 2.75 0 012 17.25V6.75zM4.5 6.9v.8l7.5 4.5 7.5-4.5v-.8a1.25 1.25 0 00-1.25-1.25H5.75A1.25 1.25 0 004.5 6.9z" />
               </svg>
-              <span>support@drcloud.co.in</span>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@drcloud.co.in&su=DrCloud%20Inquiry" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 hover:underline cursor-pointer">support@drcloud.co.in</a>
             </li>
             <li className="flex items-center gap-2">
               <svg className="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

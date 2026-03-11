@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 const ServiceCard = ({ title, description, bullets, buttonLabel, onClick }) => (
-  <div className="drcloud-card px-6 py-7 space-y-4">
+  <div className="drcloud-card px-6 py-4 space-y-4">
     <div className="flex items-center gap-3">
       <div className="h-9 w-9 rounded-2xl bg-sky-100 flex items-center justify-center text-drcloudBlue text-xl">
         🎓
