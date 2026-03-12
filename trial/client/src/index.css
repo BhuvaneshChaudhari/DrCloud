@@ -314,3 +314,10 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
   transform: translateY(-12px) scale(1.08);
 }
 
+/* our story image */
+
+.react-photo-view__content img {
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  object-fit: contain;
+}

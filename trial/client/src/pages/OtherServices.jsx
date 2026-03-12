@@ -10,18 +10,22 @@ import communityNetworking from "../assets/community-networking.png";
 
 const OtherCard = ({ icon, title, description, bullets }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 fade-in">
+    <div
+      className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      data-aos="fade-up"
+    >
 
       {/* Icon */}
       <div className="flex justify-center mb-0.5">
         <img
           src={icon}
           alt={title}
-          className="w-16 h-16 object-contain mx-auto"
+          className="w-16 h-16 object-contain mx-auto transition duration-300 hover:scale-110"
         />
       </div>
 
       <div className="flex-1">
+
         {/* Title */}
         <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">
           {title}
@@ -38,8 +42,8 @@ const OtherCard = ({ icon, title, description, bullets }) => {
             <li key={index}>{b}</li>
           ))}
         </ul>
-      </div>
 
+      </div>
     </div>
   );
 };
@@ -51,7 +55,10 @@ const OtherServices = () => {
     <div className="drcloud-container py-10 md:py-14">
 
       {/* Heading */}
-      <div className="text-center space-y-6 mb-10">
+      <div
+        className="text-center space-y-6 mb-10"
+        data-aos="fade-up"
+      >
         <h2 className="text-4xl md:text-5xl font-bold">
           <span className="text-slate-900">Other </span>
           <span className="text-drcloudBlue">Services</span>
@@ -135,7 +142,10 @@ const OtherServices = () => {
       </div>
 
       {/* Button Section */}
-      <div className="text-center mt-12 space-y-4">
+      <div
+        className="text-center mt-12 space-y-4"
+        data-aos="fade-up"
+      >
         <p className="text-base md:text-2xl text-slate-600">
           To know more about services, click below
         </p>
