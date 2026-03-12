@@ -289,8 +289,102 @@ data-aos="zoom-in"
 
 </div>
 
+
 </section>
 
+    {/* CONTACT */}
+    <section
+        id="contact"
+        className={`drcloud-container py-10 md:py-14 ${SECTION_CLASS}`}
+        data-aos="fade-up"
+      >
+
+        <div className="space-y-5 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold">
+            <span className="text-slate-900">Start Your </span>
+            <span className="text-drcloudBlue">Cloud Journey</span>
+          </h2>
+
+          <p className="text-sm md:text-xl text-slate-600 max-w-xl mx-auto">
+            Ready to transform your career? Get in touch with our experts and
+            discover the perfect learning path for you.
+          </p>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-2 items-start mt-10">
+
+          {/* Left Box */}
+          <div
+            className="drcloud-card px-6 py-6 space-y-4 flex flex-col h-full transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+            data-aos="fade-right"
+          >
+            <h3 className="text-lg font-bold text-slate-900">
+              Get Started Today
+            </h3>
+
+            <p className="text-sm text-slate-600">
+              Fill out our quick enquiry form and our team will help you choose
+              the best learning path.
+            </p>
+
+            <ul className="text-sm text-slate-600 space-y-2">
+              <li>✓ Personalized learning recommendations</li>
+              <li>✓ Free guidance from our experts</li>
+              <li>✓ Career pathway planning</li>
+            </ul>
+
+            <div className="flex justify-center pt-4 mt-auto">
+              <button
+                onClick={() => navigate('/enquiry')}
+                className="drcloud-pill-primary text-sm"
+              >
+                Open Enquiry Form
+              </button>
+            </div>
+          </div>
+
+          {/* Right Box */}
+          <div
+            className="space-y-4 drcloud-card px-6 py-6 flex flex-col h-full transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+            data-aos="fade-left"
+          >
+            <h3 className="text-lg font-bold text-slate-900">
+              Get in Touch
+            </h3>
+
+            <ul className="space-y-4 text-sm text-slate-600">
+
+              <li className="flex items-center gap-3">
+                <img src={emailIcon} alt="Email" className="w-5 h-5" />
+                <div>
+                  <div className="font-semibold text-slate-900">Email</div>
+                  <div>support@drcloud.co.in</div>
+                </div>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <img src={callIcon} alt="Call" className="w-5 h-5" />
+                <div>
+                  <div className="font-semibold text-slate-900">Call Us</div>
+                  <div>+91-842-115-0803</div>
+                </div>
+              </li>
+
+              <li className="flex items-center gap-3">
+                <img src={locationIcon} alt="Location" className="w-5 h-5" />
+                <div>
+                  <div className="font-semibold text-slate-900">Visit Us</div>
+                  <div>S. B. Patil Road, Ravet, Pune, MH 411044</div>
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </section>
 
 </div>
 
