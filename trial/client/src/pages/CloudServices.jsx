@@ -6,14 +6,19 @@ import bigDataIcon from '../assets/big_data.png';
 
 const CloudCard = ({ icon, title, description, bullets }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 fade-in">
+    <div
+      className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      data-aos="fade-up"
+    >
 
       {/* ICON */}
       <div className="flex justify-center mb-0.5">
         <img
           src={icon}
           alt={title}
-          className={`object-contain ${title === "DevOps" ? "w-20 h-20" : "w-16 h-16"}`}
+          className={`object-contain transition duration-300 hover:scale-110 ${
+            title === "DevOps" ? "w-20 h-20" : "w-16 h-16"
+          }`}
         />
       </div>
 
@@ -32,6 +37,7 @@ const CloudCard = ({ icon, title, description, bullets }) => {
           ))}
         </ul>
       </div>
+
     </div>
   );
 };
@@ -41,7 +47,11 @@ const CloudServices = () => {
 
   return (
     <div className="drcloud-container py-10 md:py-14">
-      <div className="text-center space-y-8 mb-8">
+
+      <div
+        className="text-center space-y-8 mb-8"
+        data-aos="fade-up"
+      >
         <h2 className="text-4xl md:text-5xl font-bold">
           <span className="text-slate-900">Cloud Based </span>
           <span className="text-drcloudBlue">Services</span>
@@ -91,7 +101,10 @@ const CloudServices = () => {
 
       </div>
 
-      <div className="text-center mt-12 space-y-4">
+      <div
+        className="text-center mt-12 space-y-4"
+        data-aos="fade-up"
+      >
         <p className="text-base md:text-2xl text-slate-600">
           To know more about services, click below
         </p>
@@ -104,6 +117,7 @@ const CloudServices = () => {
           Get Started
         </button>
       </div>
+
     </div>
   );
 };
