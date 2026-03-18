@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import personImg from '../assets/person.png';
 import rocketImg from '../assets/rocket.png';
@@ -14,19 +14,30 @@ import innovationIcon from '../assets/innovation.png';
 import careerIcon from '../assets/career.png';
 
 import CountUp from "react-countup";
+import { useEffect, useState } from "react";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
-const StatCard = ({ label, value, suffix = "", prefix = "" }) => (
+const StatCard = ({ label, value, suffix = "", prefix = "", start }) => (
   <div
-    className="drcloud-card px-6 py-5 flex flex-col gap-1 items-center text-center min-h-24 w-32 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+    className="drcloud-card px-6 py-5 flex flex-col gap-1 items-center text-center min-h-24 w-36 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
     data-aos="zoom-in"
   >
     <div className="text-2xl font-bold text-slate-900 tracking-wide">
       {prefix}
-      <CountUp end={value} duration={2.5} />
+      <CountUp
+        start={start ? 0 : null}
+        end={start ? value : 0}
+        duration={3}
+        separator=""
+      />
       {suffix}
     </div>
-    <div className="text-sm text-slate-600">{label}</div>
+    <div className="text-sm text-slate-600 whitespace-nowrap">
+  {label}
+</div>
   </div>
 );
 
@@ -76,7 +87,17 @@ const SECTION_CLASS = 'scroll-mt-16';
 const Home = () => {
 
   const navigate = useNavigate();
-  const { hash } = useLocation();
+  const { hash } = useLocation();const [startCounting, setStartCounting] = useState(false);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setStartCounting(true);
+      }, 800);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+
 
   useEffect(() => {
     if (hash) {
@@ -92,71 +113,77 @@ const Home = () => {
 
 {/* HERO */}
 <section
-className={`drcloud-container py-16 md:py-24 grid gap-10 md:grid-cols-[1.2fr,1fr] items-center min-h-[560px] ${SECTION_CLASS}`}
+  className={`drcloud-container py-16 md:py-24 grid gap-10 md:grid-cols-[1.2fr,1fr] items-center min-h-[560px] ${SECTION_CLASS}`}
 >
 
-{/* LEFT SIDE */}
-<div className="space-y-6" data-aos="fade-right">
+  {/* LEFT SIDE */}
+  <div
+    className="space-y-6"
+    data-aos="fade-up"
+    data-aos-delay="100"
+  >
 
-<p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1 text-xs font-medium text-drcloudBlue shadow-soft">
-Trusted Cloud & DevOps Training · 24/7 Support
-</p>
+    <p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1 text-xs font-medium text-drcloudBlue shadow-soft">
+      Trusted Cloud & DevOps Training · 24/7 Support
+    </p>
 
-<h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
-Cloud Services & Training
-</h1>
+    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
+      Cloud Services & Training
+    </h1>
 
-<p className="text-sm md:text-base text-slate-600 max-w-xl">
-Transform your business and career with cloud services, DevOps,
-training, and CSR initiatives.
-</p>
+    <p className="text-sm md:text-base text-slate-600 max-w-xl">
+      Transform your business and career with cloud services, DevOps,
+      training, and CSR initiatives.
+    </p>
 
-<div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-3">
+      <button
+        onClick={() => navigate('/enquiry')}
+        className="drcloud-pill-primary text-sm"
+      >
+        Start Learning Today
+      </button>
 
-<button
-onClick={() => navigate('/enquiry')}
-className="drcloud-pill-primary text-sm"
->
-Start Learning Today
-</button>
+      <button
+        onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+        className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 transition duration-200"
+      >
+        View Our Services
+      </button>
+    </div>
 
-<button
-onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 transition duration-200"
->
-View Our Services
-</button>
+    {/* STATS */}
+    <div
+      className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 justify-items-center"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      <StatCard label="Students Enrolled" value={1200} suffix="+" start={startCounting} />
+      <StatCard label="Success Rate" value={98} suffix="%" start={startCounting} />
+      <StatCard label="AWS Services" value={50} suffix="+" start={startCounting} />
+      <StatCard label="Support" value={24} suffix="/7" start={startCounting} />
+    </div>
 
-</div>
+  </div>
 
-{/* STATS */}
-<div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 justify-items-center">
+  {/* RIGHT SIDE */}
+  <div
+    className="relative hidden md:block w-full h-[450px]"
+    data-aos="fade-up"
+    data-aos-delay="500"
+  >
+    <img
+      src={personImg}
+      alt="Cloud Illustration"
+      className="absolute top-6 -right-20 w-[520px] object-contain transition duration-500 hover:scale-105"
+    />
 
-<StatCard label="Students Enrolled" value={1200} suffix="+" />
-<StatCard label="Success Rate" value={98} suffix="%" />
-<StatCard label="AWS Services" value={50} suffix="+" />
-<StatCard label="Support" value={24} suffix="/7" />
-
-</div>
-
-</div>
-
-{/* RIGHT SIDE */}
-<div className="relative hidden md:block w-full h-[450px]" data-aos="fade-left">
-
-<img
-src={personImg}
-alt="Cloud Illustration"
-className="absolute top-6 -right-20 w-[520px] object-contain transition duration-500 hover:scale-105"
-/>
-
-<img
-src={rocketImg}
-alt="Rocket"
-className="absolute -top-10 right-[420px] w-20 md:w-23 rotate-[-35deg] z-20 rocket-launch"
-/>
-
-</div>
+    <img
+      src={rocketImg}
+      alt="Rocket"
+      className="absolute -top-10 right-[420px] w-20 md:w-23 z-20 rocket-animate"
+    />
+  </div>
 
 </section>
 
