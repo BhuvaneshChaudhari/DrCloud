@@ -13,7 +13,7 @@ import OurStory from './pages/OurStory.jsx';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// helper to scroll to top on navigation and on mount
+// Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -21,23 +21,25 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return null;
 };
 
 const App = () => {
+  const location = useLocation();
 
-  // ✅ GLOBAL ANIMATION INIT
+  // ✅ Initialize AOS once
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 1000,
       once: true,
       easing: 'ease-in-out',
     });
   }, []);
+
+  // ✅ Refresh AOS on every route change
+  useEffect(() => {
+    AOS.refresh();
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -47,7 +49,6 @@ const App = () => {
       <ScrollToTop />
 
       <main className="flex-1">
-
         <Routes>
 
           <Route path="/" element={<Home />} />
@@ -62,12 +63,9 @@ const App = () => {
           <Route path="/cloud-services" element={<CloudServices />} />
           <Route path="/other-services" element={<OtherServices />} />
           <Route path="/enquiry" element={<Enquiry />} />
-
-          {/* Our Story */}
           <Route path="/our-story" element={<OurStory />} />
 
         </Routes>
-
       </main>
 
       <Footer />

@@ -1,0 +1,4 @@
+node_modules/
+trial/client/node_modules/
+dist/
+.env
