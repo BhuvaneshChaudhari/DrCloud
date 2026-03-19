@@ -11,33 +11,34 @@ import communityNetworking from "../assets/community-networking.png";
 const OtherCard = ({ icon, title, description, bullets }) => {
   return (
     <div
-      className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="drcloud-card px-6 py-6 flex flex-col justify-between h-full min-h-[320px] text-center transition duration-300 hover:-translate-y-1 hover:shadow-xl"
       data-aos="fade-up"
     >
 
       {/* Icon */}
-      <div className="flex justify-center mb-0.5">
+      <div className="flex justify-center mb-3">
         <img
           src={icon}
           alt={title}
-          className="w-16 h-16 object-contain mx-auto transition duration-300 hover:scale-110"
+          className="w-16 h-16 object-contain transition duration-300 hover:scale-110"
         />
       </div>
 
-      <div className="flex-1">
+      {/* Content */}
+      <div className="flex flex-col flex-1">
 
         {/* Title */}
-        <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">
+        <h3 className="text-2xl font-bold text-slate-900 mb-2">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-slate-600 mb-4">
+        <p className="text-sm text-slate-600 mb-3">
           {description}
         </p>
 
-        {/* Bullet Points */}
-        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+        {/* Bullets */}
+        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 text-left mx-auto">
           {bullets.map((b, index) => (
             <li key={index}>{b}</li>
           ))}
@@ -71,7 +72,7 @@ const OtherServices = () => {
       </div>
 
       {/* Cards Grid */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3 items-stretch">
 
         <OtherCard
           icon={expertInstructor}
