@@ -13,7 +13,8 @@ import OurStory from './pages/OurStory.jsx';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Scroll to top on route change
+
+// ✅ Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -23,6 +24,21 @@ const ScrollToTop = () => {
 
   return null;
 };
+
+
+// ✅ FINAL: Force Home on reload (100% working)
+const ReloadToHome = () => {
+  useEffect(() => {
+    const navEntries = performance.getEntriesByType("navigation");
+
+    if (navEntries.length > 0 && navEntries[0].type === "reload") {
+      window.location.replace("/"); // 🔥 force home
+    }
+  }, []);
+
+  return null;
+};
+
 
 const App = () => {
   const location = useLocation();
@@ -45,6 +61,9 @@ const App = () => {
     <div className="min-h-screen flex flex-col">
 
       <Navbar />
+
+      {/* ✅ IMPORTANT: Reload fix added here */}
+      <ReloadToHome />
 
       <ScrollToTop />
 
