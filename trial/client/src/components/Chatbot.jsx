@@ -5,6 +5,8 @@ import drlogo from "../assets/drlogo1.png";
 import robot from "../assets/robot.jpg";
 import ChatbotEnquiryForm from "./ChatbotEnquiryForm";
 
+
+
 const translations = {
   en: {
     quickReplies: {
@@ -164,7 +166,8 @@ const defaultMessages = [
 ];
 
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);   
+  const [showGreeting, setShowGreeting] = useState(false);
   const [messages, setMessages] = useState([...defaultMessages]);
   const [serviceOptions, setServiceOptions] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -174,8 +177,32 @@ const Chatbot = () => {
   const [showEnquiryForm, setShowEnquiryForm] = useState(false);
   const navigate = useNavigate();
 
-  const chatEndRef = useRef(null);
+const chatEndRef = useRef(null);
 
+useEffect(() => {
+
+  const showGreetingLoop = () => {
+    setShowGreeting(true);
+
+    // hide after 8 seconds
+    setTimeout(() => {
+      setShowGreeting(false);
+
+      // show again after 10 seconds
+      setTimeout(() => {
+        if (!isOpen) {
+          showGreetingLoop();
+        }
+      }, 10000);
+
+    }, 8000);
+  };
+
+  const initialTimer = setTimeout(showGreetingLoop, 5000);
+
+  return () => clearTimeout(initialTimer);
+
+}, [isOpen]);
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, serviceOptions]);
@@ -291,24 +318,35 @@ const Chatbot = () => {
         type="button"
         onClick={() => {
           setIsOpen((v) => !v);
+          setShowGreeting(false); 
           setMessages([...defaultMessages]);
           setServiceOptions([]);
           setLastSelected(null);
           setLanguage(null);
         }}
-        className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-drcloudBlue to-sky-400 shadow-soft flex items-center justify-center text-white overflow-hidden"
+
+    
+
+        className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-drcloudBlue to-sky-400 shadow-soft flex items-center justify-center text-white overflow-hidden chatbot-float"
         aria-label="Open DrCloud Chatbot"
       >
         <img
-          src={robot}
-          alt="DrCloud Chatbot"
-          className="w-full h-full object-cover"
-        />
+        src={robot}
+        alt="DrCloud Chatbot"
+        className="w-full h-full object-cover robot-idle"
+      />
       </button>
+
+      {showGreeting && !isOpen && (
+          <div className="fixed bottom-24 right-5 bg-white text-gray-800 text-sm px-4 py-2 rounded-xl shadow-lg z-40 animate-[float_3s_ease-in-out_infinite] transition-opacity duration-700" >
+              ☁️ Welcome to DrCloud! <br />
+              Need help exploring our cloud courses or services?
+          </div>
+      )}
 
       {isOpen && (
         <div
-          className="fixed bottom-10 right-5 z-40 w-[400px] h-[560px] max-w-[95vw] flex flex-col rounded-3xl overflow-hidden shadow-2xl"
+          className="fixed bottom-10 right-5 z-40 w-[400px] h-[560px] max-w-[95vw] flex flex-col rounded-3xl overflow-hidden shadow-2xl chatbot-open"
           style={{
             backgroundImage: `url(${cloudBg})`,
             backgroundSize: "cover",
@@ -355,8 +393,8 @@ const Chatbot = () => {
                 <div
                   className={
                     msg.from === 'user'
-                      ? 'chatbot-bubble-user'
-                      : 'chatbot-bubble-bot'
+                    ? 'chatbot-bubble-user message-pop'
+                    : 'chatbot-bubble-bot message-pop'
                   }
                 >
                   {msg.type === "enquiryForm" ? (
