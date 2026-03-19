@@ -174,7 +174,7 @@ const Chatbot = () => {
   const [lastSelected, setLastSelected] = useState(null);
   const [language, setLanguage] = useState(null);
   const t = translations[language] || translations.en;
-  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+  const [showEnquiryForm] = useState(false);
   const navigate = useNavigate();
 
 const chatEndRef = useRef(null);

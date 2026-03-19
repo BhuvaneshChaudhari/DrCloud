@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import CountUp from "react-countup";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import AOS from "aos";
@@ -53,7 +52,6 @@ const GALLERY = [
 
 const OurStory = () => {
 
-  const navigate = useNavigate();
   const { ref, inView } = useInView({ triggerOnce: true });
 
   useEffect(() => {
