@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import apiClient from "../lib/apiClient";
+import "./ChatbotEnquiryForm.css";
 
 const initialState = {
   fullName: "",
@@ -33,18 +34,21 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+  
     try {
-      setSubmitting(true);
-      const payload = {
+      // ✅ REAL API CALL
+      await apiClient.post("/api/enquiry", {
         name: form.fullName.trim(),
         email: form.email,
         phone: form.phone,
         serviceType: form.serviceType,
-      };
-      await apiClient.post("/api/enquiry", payload);
+      });
+  
       setStatus("success");
       setForm(initialState);
       if (onSuccess) onSuccess();
+  
     } catch {
       setStatus("error");
     } finally {
@@ -52,156 +56,88 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
     }
   };
 
-  // Auto-close status messages after 3 seconds
-  useEffect(() => {
-    if (status) {
-      const timer = setTimeout(() => setStatus(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
-
   return (
-    <div className="w-[280px] max-w-[280px] animate-slideIn">
-      <form className="flex flex-col gap-4 text-sm" onSubmit={handleSubmit}>
-        {/* Full Name */}
-        <div className="relative">
-          <label
-            className={`absolute left-3 text-xs transition-all duration-200 pointer-events-none
-            ${form.fullName ? "text-blue-500 -top-2 bg-white px-1" : "text-slate-600 top-2"}`}
-          >
-            {t.form.fullName}
-          </label>
+    <div className="w-full">
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+
+        <div style={{ animation: 'fieldIn 0.35s ease 0ms both' }}>
+          <label className="cf-label">{t.form.fullName}</label>
           <input
             name="fullName"
             value={form.fullName}
             onChange={handleChange}
             required
-            className="w-full rounded-lg border border-slate-200 px-3 pt-5 pb-2 bg-white
-            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            className="cf-input"
           />
         </div>
 
-        {/* Email */}
-        <div className="relative">
-          <label
-            className={`absolute left-3 text-xs transition-all duration-200 pointer-events-none
-            ${form.email ? "text-blue-500 -top-2 bg-white px-1" : "text-slate-600 top-2"}`}
-          >
-            {t.form.email}
-          </label>
+        <div style={{ animation: 'fieldIn 0.35s ease 60ms both' }}>
+          <label className="cf-label">{t.form.email}</label>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full rounded-lg border border-slate-200 px-3 pt-5 pb-2 bg-white
-            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            className="cf-input"
           />
         </div>
 
-        {/* Phone */}
-        <div className="relative">
-          <label
-            className={`absolute left-3 text-xs transition-all duration-200 pointer-events-none
-            ${form.phone ? "text-blue-500 -top-2 bg-white px-1" : "text-slate-600 top-2"}`}
-          >
-            {t.form.phone}
-          </label>
+        <div style={{ animation: 'fieldIn 0.35s ease 120ms both' }}>
+          <label className="cf-label">{t.form.phone}</label>
           <input
             type="tel"
             name="phone"
             value={form.phone}
             onChange={handleChange}
             required
-            className="w-full rounded-lg border border-slate-200 px-3 pt-5 pb-2 bg-white
-            focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            className="cf-input"
           />
         </div>
 
-        {/* Service Dropdown */}
-        <div className="relative">
-          <label className="block text-xs font-medium text-slate-600 mb-1">
-            {t.form.service}
-          </label>
+        <div style={{ animation: 'fieldIn 0.35s ease 180ms both' }} className="relative">
+          <label className="cf-label">{t.form.service}</label>
           <button
             type="button"
             onClick={() => setOpenDropdown(!openDropdown)}
-            className="w-full rounded-lg border border-slate-200 px-3 py-2 bg-white text-left
-            hover:shadow-md transition transform hover:scale-105"
+            className={`cf-dropdown-btn ${openDropdown ? 'open' : ''}`}
           >
-            {form.serviceType || t.form.servicePlaceholder}
+            <span style={{ color: form.serviceType ? '#1e293b' : '#94a3b8' }}>
+              {form.serviceType || t.form.servicePlaceholder}
+            </span>
+            <span className={`cf-chevron ${openDropdown ? 'open' : ''}`}>▼</span>
           </button>
-
-          <ul
-            className={`absolute left-0 mt-1 w-full max-h-32 overflow-y-auto border border-slate-200
-            rounded-lg bg-white shadow-inner z-10 transition-all duration-300 ease-in-out
-            ${openDropdown ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}`}
-          >
-            {services.map((service) => (
-              <li
-                key={service}
-                onClick={() => {
-                  setForm((prev) => ({ ...prev, serviceType: service }));
-                  setOpenDropdown(false);
-                }}
-                className="px-3 py-2 hover:bg-slate-100 cursor-pointer"
-              >
-                {service}
-              </li>
-            ))}
-          </ul>
+          {openDropdown && (
+            <ul className="cf-dropdown-list">
+              {services.map((service) => (
+                <li
+                  key={service}
+                  onClick={() => { setForm(prev => ({ ...prev, serviceType: service })); setOpenDropdown(false); }}
+                  className="cf-dropdown-item"
+                >
+                  {service}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        {/* Status Messages */}
-        {status === "success" && (
-          <p className="text-green-600 text-xs transition transform scale-95 opacity-0 animate-pop">
-            {t.form.success}
-          </p>
-        )}
-        {status === "error" && (
-          <p className="text-red-500 text-xs transition transform scale-95 opacity-0 animate-pop">
-            {t.form.error}
-          </p>
-        )}
+        {status === "success" && <div className="cf-success">✅ {t.form.success}</div>}
+        {status === "error"   && <div className="cf-error">❌ {t.form.error}</div>}
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={submitting}
-          className="bg-blue-600 text-white rounded-lg py-2 text-sm
-          hover:bg-blue-700 hover:scale-105 active:scale-95 transition transform"
-        >
-          {submitting ? t.form.submitting : t.form.submit}
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', animation: 'fieldIn 0.35s ease 240ms both' }}>
+          <button type="submit" disabled={submitting} className="cf-submit-btn">
+            {submitting
+              ? <><span className="cf-spinner" />{t.form.submitting}</>
+              : t.form.submit
+            }
+          </button>
+          <button type="button" onClick={onCancel} className="cf-cancel-btn">
+            {t.form.cancel}
+          </button>
+        </div>
 
-        {/* Cancel Button */}
-        <button
-          type="button"
-          onClick={onCancel}
-          className="bg-gray-200 text-gray-700 rounded-lg py-2 text-sm
-          hover:bg-gray-300 hover:scale-105 active:scale-95 transition transform"
-        >
-          {t.form.cancel}
-        </button>
       </form>
-
-      {/* Tailwind Keyframe Animations */}
-      <style>
-        {`
-          @keyframes slideIn {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-          }
-          .animate-slideIn { animation: slideIn 0.5s ease-out; }
-
-          @keyframes pop {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-          .animate-pop { animation: pop 0.3s ease-out forwards; }
-        `}
-      </style>
     </div>
   );
 };

@@ -1,0 +1,128 @@
+@keyframes fieldIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes popIn {
+    0%   { transform: scale(0.85); opacity: 0; }
+    60%  { transform: scale(1.05); }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  .cf-label {
+    display: block;
+    font-size: 11px; font-weight: 700;
+    color: #475569; margin-bottom: 5px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .cf-input {
+    width: 100%; border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    padding: 9px 12px; font-size: 13px; color: #1e293b;
+    background: rgba(248,250,252,0.9);
+    outline: none; box-sizing: border-box;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .cf-input:focus {
+    border-color: #3b82f6; background: white;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    transform: scale(1.01);
+  }
+  .cf-dropdown-btn {
+    width: 100%; border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    padding: 9px 12px; font-size: 13px;
+    text-align: left; background: rgba(248,250,252,0.9);
+    color: #1e293b; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    box-sizing: border-box;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .cf-dropdown-btn:focus, .cf-dropdown-btn.open {
+    border-color: #3b82f6; background: white;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    transform: scale(1.01); outline: none;
+  }
+  .cf-chevron {
+    font-size: 9px; color: #94a3b8;
+    transition: transform 0.25s ease;
+  }
+  .cf-chevron.open { transform: rotate(180deg); }
+  .cf-dropdown-list {
+    position: relative; margin-top: 4px;
+    border: 1.5px solid #bfdbfe; border-radius: 10px;
+    background: white; overflow: hidden;
+    box-shadow: 0 8px 20px rgba(37,99,235,0.12);
+    animation: fieldIn 0.2s ease both;
+    max-height: 130px; overflow-y: auto;
+  }
+  .cf-dropdown-item {
+    padding: 8px 12px; font-size: 13px;
+    cursor: pointer; color: #1e293b;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+  }
+  .cf-dropdown-item:hover {
+    background: #eff6ff; color: #1d4ed8;
+    border-left-color: #3b82f6; padding-left: 16px;
+  }
+  .cf-submit-btn {
+    width: 100%; padding: 11px; border-radius: 12px;
+    font-size: 14px; font-weight: 700; color: white; border: none;
+    cursor: pointer; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #7c3aed 100%);
+    background-size: 200% auto;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    letter-spacing: 0.02em;
+  }
+  .cf-submit-btn:hover:not(:disabled) {
+    background-position: right center;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.55);
+    transform: translateY(-2px) scale(1.01);
+  }
+  .cf-submit-btn:active:not(:disabled) { transform: scale(0.97); }
+  .cf-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+  .cf-submit-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    background-size: 200% auto;
+    animation: shimmer 2s linear infinite;
+  }
+  .cf-cancel-btn {
+    width: 100%; padding: 9px; border-radius: 12px;
+    font-size: 13px; font-weight: 600; color: #64748b;
+    background: rgba(241,245,249,0.9);
+    border: 1.5px solid #e2e8f0; cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .cf-cancel-btn:hover {
+    background: #fee2e2; color: #ef4444;
+    border-color: #fca5a5; transform: scale(1.01);
+  }
+  .cf-spinner {
+    display: inline-block; width: 13px; height: 13px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: white; border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 6px;
+  }
+  .cf-success {
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    background: #f0fdf4; border: 1px solid #86efac;
+    border-radius: 8px; padding: 8px 12px;
+    font-size: 12px; color: #16a34a; font-weight: 600;
+  }
+  .cf-error {
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    background: #fef2f2; border: 1px solid #fca5a5;
+    border-radius: 8px; padding: 8px 12px;
+    font-size: 12px; color: #dc2626; font-weight: 600;
+  }
+  
