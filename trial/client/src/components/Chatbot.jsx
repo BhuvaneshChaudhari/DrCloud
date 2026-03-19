@@ -10,6 +10,7 @@ const translations = {
   en: {
     quickReplies: {
       services: "Browse Services",
+      
       enquiry: "Enquiry Form",
       contact: "Contact Us",
       changeLanguage: "Change Language"

@@ -22,7 +22,7 @@ const Navbar = () => {
     if (!isHome) {
       setActiveSection('');
     }
-  }, [pathname]);
+  }, [pathname, isHome]);
 
   useEffect(() => {
     // Only observe sections if we're on the home page
