@@ -44,7 +44,7 @@ const testimonials = [
 
 const About = () => {
   return (
-    <div className="drcloud-container py-10 md:py-14 space-y-12">
+    <div className="drcloud-container py-10 md:py-14 space-y-12" data-aos="fade-up">
       <section className="space-y-4 text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
           About DrCloud
@@ -58,13 +58,16 @@ const About = () => {
         </p>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-4">
+      <section className="grid gap-6 md:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
         {pillars.map((p) => (
-          <div key={p.title} className="drcloud-card px-5 py-6 space-y-2">
-            <h3 className="text-base font-semibold text-slate-900">
+          <div
+            key={p.title}
+            className="pillar-box w-[250px] h-[250px] flex flex-col items-center justify-center text-center rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 p-6"
+          >
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">
               {p.title}
             </h3>
-            <p className="text-sm text-slate-600">{p.body}</p>
+            <p className="text-xs text-slate-600 px-2">{p.body}</p>
           </div>
         ))}
       </section>

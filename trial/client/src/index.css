@@ -25,16 +25,39 @@ body {
 }
 
 .drcloud-card {
-  @apply rounded-2xl bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 transition duration-300;
+  @apply rounded-2xl bg-white/10 shadow-xl backdrop-blur-xl border border-white/20;
+  transition: transform 0.2s ease-out, 
+              box-shadow 0.2s ease-out, 
+              background-color 0.2s ease-out, 
+              border-color 0.2s ease-out !important;
+  will-change: transform;
 }
 
 .drcloud-card:hover {
   @apply bg-white/20 shadow-2xl;
-  transform: translateY(-8px);
+  transform: translateY(-15px) scale(1.06) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  z-index: 10;
+}
+
+.pillar-box {
+  @apply rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20;
+  transition: transform 0.1s ease-out, 
+              box-shadow 0.1s ease-out, 
+              background-color 0.1s ease-out, 
+              border-color 0.1s ease-out !important;
+  will-change: transform;
+}
+
+.pillar-box:hover {
+  @apply bg-white/25 shadow-2xl;
+  transform: translateY(-15px) scale(1.1) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  z-index: 10;
 }
 
 .drcloud-pill-button {
-  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-300;
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-100 ease-out;
 }
 
 .drcloud-pill-primary {
@@ -66,7 +89,7 @@ body {
 
 /* Generic button animations */
 button {
-  @apply transition-all duration-300;
+  @apply transition-all duration-100 ease-out;
 }
 
 button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
@@ -267,18 +290,6 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
   animation: rocketLaunch 1.6s ease-out forwards, rocketFloat 3s ease-in-out 1.6s infinite;
 }
 
-/* Hover Animations for All Boxes */
-
-/* Pillar/About Boxes - Circular boxes */
-.pillar-box {
-  @apply transition-all duration-300 cursor-pointer;
-}
-
-.pillar-box:hover {
-  @apply bg-white/20 shadow-2xl;
-  transform: translateY(-12px) scale(1.08);
-}
-
 /* our story image */
 
 .react-photo-view__content img {
@@ -288,34 +299,9 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
 }
  
 
-/* Phase 1: Takeoff animation */
-@keyframes rocketTakeOff {
-  0% {
-    transform: translate(200px, 200px) rotate(-35deg);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0px, 0px) rotate(-35deg);
-    opacity: 1;
-  }
-}
-
-/* Phase 2: Floating animation */
-@keyframes rocketFloat {
-  0% {
-    transform: translateY(0px) rotate(-35deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(-35deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(-35deg);
-  }
-}
-
 /* Combined animation */
 .rocket-animate {
   animation:
-    rocketTakeOff 1.8s ease-out forwards,
+    rocketLaunch 1.8s ease-out forwards,
     rocketFloat 3s ease-in-out 1.8s infinite;
 }

@@ -10,10 +10,7 @@ import communityNetworking from "../assets/community-networking.png";
 
 const OtherCard = ({ icon, title, description, bullets }) => {
   return (
-    <div
-      className="drcloud-card px-6 py-6 flex flex-col justify-between h-full min-h-[320px] text-center transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-      data-aos="fade-up"
-    >
+    <div className="drcloud-card px-6 py-6 flex flex-col justify-between h-full min-h-[320px] text-center">
 
       {/* Icon */}
       <div className="flex justify-center mb-3">
@@ -53,13 +50,10 @@ const OtherServices = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="drcloud-container py-10 md:py-14">
+    <div className="drcloud-container py-10 md:py-14" data-aos="fade-up">
 
       {/* Heading */}
-      <div
-        className="text-center space-y-6 mb-10"
-        data-aos="fade-up"
-      >
+      <div className="text-center space-y-6 mb-10">
         <h2 className="text-4xl md:text-5xl font-bold">
           <span className="text-slate-900">Other </span>
           <span className="text-drcloudBlue">Services</span>
@@ -143,10 +137,7 @@ const OtherServices = () => {
       </div>
 
       {/* Button Section */}
-      <div
-        className="text-center mt-12 space-y-4"
-        data-aos="fade-up"
-      >
+      <div className="text-center mt-12 space-y-4">
         <p className="text-base md:text-2xl text-slate-600">
           To know more about services, click below
         </p>

@@ -123,7 +123,7 @@ const OurStory = () => {
 
               <div className="absolute left-0 top-1 w-6 h-6 bg-drcloudBlue rounded-full border-4 border-white"></div>
 
-              <div className="drcloud-card p-6 space-y-2 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="drcloud-card p-6 space-y-2">
 
                 <div className="text-sm text-drcloudBlue font-semibold">
                   {event.year}
@@ -151,7 +151,7 @@ const OurStory = () => {
       <section ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
         {STATS.map((stat, index) => (
-          <div key={index} className="drcloud-card p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div key={index} className="drcloud-card p-6">
 
             <div className="text-3xl font-bold text-drcloudBlue">
               {inView && <CountUp end={stat.number} duration={2} />}+

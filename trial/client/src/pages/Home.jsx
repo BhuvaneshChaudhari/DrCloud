@@ -20,10 +20,7 @@ import "aos/dist/aos.css";
 
 
 const StatCard = ({ label, value, suffix = "", prefix = "", start }) => (
-  <div
-    className="drcloud-card px-6 py-5 flex flex-col gap-1 items-center text-center min-h-24 w-36 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-    data-aos="zoom-in"
-  >
+  <div className="drcloud-card px-6 py-5 flex flex-col gap-1 items-center text-center min-h-24 w-36">
     <div className="text-2xl font-bold text-slate-900 tracking-wide">
       {prefix}
       <CountUp
@@ -42,10 +39,7 @@ const StatCard = ({ label, value, suffix = "", prefix = "", start }) => (
 
 
 const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon }) => (
-  <div
-    className="drcloud-card px-6 py-5 flex flex-col h-full transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-    data-aos="fade-up"
-  >
+  <div className="drcloud-card px-6 py-5 flex flex-col h-full">
     <div className="flex flex-col items-center text-center gap-2">
       <img src={icon} alt={title} className="w-14 h-14 object-contain" />
       <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">{title}</h3>
@@ -113,7 +107,7 @@ const Home = () => {
       const el = document.getElementById(id);
 
       if (el) {
-        const navbarHeight = 90; // adjust if needed
+        const navbarHeight = 100; // slightly increased for better alignment
         const y = el.offsetTop - navbarHeight;
 
         window.scrollTo({
@@ -162,7 +156,7 @@ const Home = () => {
             </button>
 
             <button
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => navigate('/#services')}
               className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 transition duration-200"
             >
               View Our Services
@@ -311,8 +305,7 @@ const Home = () => {
 
             <div
               key={p.title}
-              className="pillar-box w-[250px] h-[250px] flex flex-col items-center justify-center text-center rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-              data-aos="zoom-in"
+              className="pillar-box w-[250px] h-[250px] flex flex-col items-center justify-center text-center rounded-full bg-white/10 shadow-xl backdrop-blur-xl border border-white/20 p-6"
             >
 
               <img src={p.icon} alt={p.title} className="w-12 h-12 mb-3 object-contain" />
@@ -356,7 +349,7 @@ const Home = () => {
 
           {/* Left Box */}
           <div
-            className="drcloud-card px-6 py-6 space-y-4 flex flex-col h-full transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="drcloud-card px-6 py-6 space-y-4 flex flex-col h-full"
             data-aos="fade-right"
           >
             <h3 className="text-lg font-bold text-slate-900">
@@ -386,7 +379,7 @@ const Home = () => {
 
           {/* Right Box */}
           <div
-            className="space-y-4 drcloud-card px-6 py-6 flex flex-col h-full transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="space-y-4 drcloud-card px-6 py-6 flex flex-col h-full"
             data-aos="fade-left"
           >
             <h3 className="text-lg font-bold text-slate-900">
@@ -415,7 +408,7 @@ const Home = () => {
                 <img src={locationIcon} alt="Location" className="w-5 h-5" />
                 <div>
                   <div className="font-semibold text-slate-900">Visit Us</div>
-                  <div>S. B. Patil Road, Ravet, Pune, MH 411044</div>
+                  <div>Pune, Maharashtra 411044</div>
                 </div>
               </li>
 

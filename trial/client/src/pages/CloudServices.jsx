@@ -6,10 +6,7 @@ import bigDataIcon from '../assets/big_data.png';
 
 const CloudCard = ({ icon, title, description, bullets }) => {
   return (
-    <div
-      className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-      data-aos="fade-up"
-    >
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80">
 
       {/* ICON */}
       <div className="flex justify-center mb-0.5">
@@ -46,12 +43,9 @@ const CloudServices = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="drcloud-container py-10 md:py-14">
+    <div className="drcloud-container py-10 md:py-14" data-aos="fade-up">
 
-      <div
-        className="text-center space-y-8 mb-8"
-        data-aos="fade-up"
-      >
+      <div className="text-center space-y-8 mb-8">
         <h2 className="text-4xl md:text-5xl font-bold">
           <span className="text-slate-900">Cloud Based </span>
           <span className="text-drcloudBlue">Services</span>
@@ -101,10 +95,7 @@ const CloudServices = () => {
 
       </div>
 
-      <div
-        className="text-center mt-12 space-y-4"
-        data-aos="fade-up"
-      >
+      <div className="text-center mt-12 space-y-4">
         <p className="text-base md:text-2xl text-slate-600">
           To know more about services, click below
         </p>

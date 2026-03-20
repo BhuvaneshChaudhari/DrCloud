@@ -188,7 +188,7 @@ const Footer = () => {
               >
                 <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
               </svg>
-              <span>S. B. Patil Road, Ravet, Pune, MH 411044</span>
+              <span>Pune, Maharashtra 411044</span>
             </li>
           </ul>
         </div>

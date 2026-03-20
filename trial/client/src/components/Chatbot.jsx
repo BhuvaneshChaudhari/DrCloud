@@ -144,8 +144,9 @@ const QuickBtn = ({ onClick, children, delay = 0 }) => (
 );
 
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [visible, setVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [showLauncher, setShowLauncher] = useState(false);
   const [messages, setMessages] = useState([...defaultMessages]);
   const [serviceOptions, setServiceOptions] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -157,15 +158,33 @@ const Chatbot = () => {
   const navigate = useNavigate();
   const chatEndRef = useRef(null);
 
+  // Auto-open chatbot after 4 seconds
+  const [entryMethod, setEntryMethod] = useState('manual'); // 'manual' or 'auto'
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setEntryMethod('auto');
+      setShowLauncher(true);
+      setIsOpen(true);
+      setVisible(true);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, serviceOptions, isTyping]);
 
-  const openChat = () => { setIsOpen(true); setVisible(true); };
+  const openChat = () => { 
+    setEntryMethod('manual');
+    setIsOpen(true); 
+    setVisible(true); 
+  };
 
   const closeChat = () => {
     setVisible(false);
     setTimeout(() => {
+      setEntryMethod('manual');
       setIsOpen(false);
       setMessages([...defaultMessages]);
       setServiceOptions([]);
@@ -246,15 +265,17 @@ const Chatbot = () => {
   return (
     <>
       {/* ── Launcher button ── */}
-      <button
-        type="button"
-        onClick={() => isOpen ? closeChat() : openChat()}
-        className="cb-launcher"
-        aria-label="Toggle DrCloud Chatbot"
-      >
-        <img src={robot} alt="DrCloud Chatbot" className="w-full h-full object-cover" />
-        <span className="cb-ping" />
-      </button>
+      {showLauncher && (
+        <button
+          type="button"
+          onClick={() => isOpen ? closeChat() : openChat()}
+          className="cb-launcher"
+          aria-label="Toggle DrCloud Chatbot"
+        >
+          <img src={robot} alt="DrCloud Chatbot" className="w-full h-full object-cover" />
+          <span className="cb-ping" />
+        </button>
+      )}
 
       {/* ── Chat window ── */}
       {isOpen && (
@@ -264,7 +285,9 @@ const Chatbot = () => {
             backgroundImage: `url(${cloudBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            animation: visible ? 'windowIn 0.45s cubic-bezier(0.34,1.4,0.64,1) both' : 'windowOut 0.3s ease both'
+            animation: visible 
+              ? (entryMethod === 'auto' ? 'slowFadeIn 1.5s ease-out both' : 'windowIn 0.45s cubic-bezier(0.34,1.4,0.64,1) both') 
+              : 'windowOut 0.3s ease both'
           }}
         >
           {/* Frosted glass overlay */}
