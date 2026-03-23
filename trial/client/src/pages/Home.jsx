@@ -78,6 +78,29 @@ const PILLARS = [
 const SECTION_CLASS = 'scroll-mt-24';
 
 
+
+const TESTIMONIALS = [
+  {
+    name: "Rahul Sharma",
+    company: "AWS Engineer",
+    quote:
+      "DrCloud transformed my career. The hands-on training, real-time project exposure, and dedicated mentorship helped me land my dream cloud role. The practical labs and interview preparation sessions made a huge difference in my confidence and technical depth."
+  },
+  {
+    name: "Sneha Patil",
+    company: "DevOps Consultant",
+    quote:
+      "The curriculum is industry-focused and practical. I gained real-world skills in CI/CD, cloud deployment, and automation that boosted my confidence. The structured roadmap and continuous guidance ensured I stayed on track throughout my learning journey."
+  },
+  {
+    name: "Amit Verma",
+    company: "Cloud Architect",
+    quote:
+      "Excellent support and guidance throughout the journey. From foundational concepts to advanced cloud architecture, everything was explained clearly. The mock interviews, resume reviews, and career mentorship were incredibly valuable. Highly recommended for serious cloud aspirants."
+  }
+];
+
+
 const Home = () => {
 
   const navigate = useNavigate();
@@ -272,7 +295,7 @@ const Home = () => {
       {/* ABOUT */}
       <section
         id="about"
-        className={`drcloud-container py-10 md:py-14 space-y-8 ${SECTION_CLASS}`}
+        className={`drcloud-container py-16 md:py-24 space-y-8 ${SECTION_CLASS}`}
         data-aos="fade-up"
       >
 
@@ -323,6 +346,48 @@ const Home = () => {
           ))}
 
         </div>
+
+        {/* WHAT THEY SAY */}
+<div
+ className="space-y-8 mt-24 md:mt-32" 
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
+  <div className="text-center space-y-3">
+    <h3 className="text-3xl md:text-4xl font-bold">
+      <span className="text-slate-900">What They </span>
+      <span className="text-drcloudBlue">Say</span>
+    </h3>
+
+    <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
+      What our students and professionals who trusted DrCloud for their
+      career growth say about us.
+    </p>
+  </div>
+
+  <div className="grid gap-6 md:grid-cols-3">
+    {TESTIMONIALS.map((t) => (
+      <div
+        key={t.name}
+        className="drcloud-card px-6 py-6 flex flex-col justify-between h-full"
+        data-aos="fade-up"
+      >
+        <p className="text-sm text-slate-600 mb-4">
+          "{t.quote}"
+        </p>
+
+        <div className="mt-auto">
+          <div className="text-sm font-semibold text-slate-900">
+            {t.name}
+          </div>
+          <div className="text-xs text-drcloudBlue">
+            {t.company}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
       </section>
 

@@ -305,3 +305,102 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
     rocketLaunch 1.8s ease-out forwards,
     rocketFloat 3s ease-in-out 1.8s infinite;
 }
+
+
+/* collaborator */
+
+/* ===============================
+   LUXURY INFINITE SCROLL
+================================ */
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 55s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}
+
+
+/* ===============================
+   PREMIUM CARD + 3D TILT
+================================ */
+
+/* Add perspective to parent wrapper */
+.scroll-wrapper {
+  perspective: 1200px;
+}
+
+.flex-shrink-0 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+  will-change: transform;
+}
+
+/* Base image styling */
+.flex-shrink-0 img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  transition: 
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease;
+  filter: grayscale(20%);
+}
+
+
+/* ===============================
+   HOVER EFFECT (SUBTLE + PREMIUM)
+================================ */
+
+.flex-shrink-0:hover {
+  transform: rotateY(6deg) rotateX(4deg) translateY(-8px);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.18),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.flex-shrink-0:hover img {
+  transform: scale(1.08) translateZ(20px);
+  filter: grayscale(0%);
+}
+
+
+/* ===============================
+   OPTIONAL: SOFT GLOW (REMOVE IF NOT NEEDED)
+================================ */
+
+.flex-shrink-0::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.flex-shrink-0:hover::after {
+  opacity: 1;
+}
+

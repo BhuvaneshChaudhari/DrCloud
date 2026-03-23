@@ -7,6 +7,8 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import founderImg from "../assets/founder.jpeg";
 
+import Collaborators from '../components/Collaborators';
+
 const EVENTS = [
   {
     year: "2022",
@@ -222,6 +224,8 @@ const OurStory = () => {
         </div>
 
       </section>
+
+      <Collaborators />
 
     </div>
   );
