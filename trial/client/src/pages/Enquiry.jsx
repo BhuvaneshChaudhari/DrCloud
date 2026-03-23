@@ -247,7 +247,7 @@ const Enquiry = () => {
           <div>
 
             <label className="block text-xs font-medium text-slate-600 mb-1">
-              Message
+              Message <span className="text-slate-400 font-normal">(Optional)</span>
             </label>
 
             <textarea
@@ -255,7 +255,6 @@ const Enquiry = () => {
               value={form.message}
               onChange={handleChange}
               rows={4}
-              required
               className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-drcloudBlue/40 resize-none"
             />
 

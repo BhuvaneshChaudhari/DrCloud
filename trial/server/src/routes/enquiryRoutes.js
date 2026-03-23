@@ -30,9 +30,6 @@ router.post('/', async (req, res) => {
     if (!serviceType) {
       return res.status(400).json({ message: 'Service type is required.' });
     }
-    if (!message || message.length < 10) {
-      return res.status(400).json({ message: 'Message should be at least 10 characters.' });
-    }
 
     const enquiry = await Enquiry.create({
       name,
