@@ -35,7 +35,7 @@ const OtherCard = ({ icon, title, description, bullets }) => {
         </p>
 
         {/* Bullets */}
-        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 text-left mx-auto">
+        <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 text-left w-full">
           {bullets.map((b, index) => (
             <li key={index}>{b}</li>
           ))}

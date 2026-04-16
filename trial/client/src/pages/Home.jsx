@@ -15,23 +15,27 @@ import careerIcon from '../assets/career.png';
 
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import Collaborators from '../components/Collaborators';
 
 import "aos/dist/aos.css";
 
 
 const StatCard = ({ label, value, suffix = "", prefix = "", start }) => (
-  <div className="drcloud-card px-6 py-5 flex flex-col gap-1 items-center text-center min-h-24 w-36">
-    <div className="text-2xl font-bold text-slate-900 tracking-wide">
+  <div className="drcloud-card px-4 py-4 flex flex-col gap-1 items-center text-center min-h-[120px] w-32">
+    <div className="text-2xl font-bold text-slate-900">
       {prefix}
       <CountUp
         start={start ? 0 : null}
         end={start ? value : 0}
-        duration={3}
+        duration={2}
         separator=""
       />
       {suffix}
     </div>
-    <div className="text-sm text-slate-600 whitespace-nowrap">
+    <div className="text-sm text-slate-600 mt-1">
       {label}
     </div>
   </div>
@@ -47,7 +51,7 @@ const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon }
 
     <p className="text-sm text-slate-600">{description}</p>
 
-    <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+    <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 text-left w-full">
       {bullets.map((b) => (
         <li key={b}>{b}</li>
       ))}
@@ -100,12 +104,29 @@ const TESTIMONIALS = [
   }
 ];
 
+const STORY_STATS = [
+  { number: 500, label: "Students Trained" },
+  { number: 120, label: "Placements" },
+  { number: 20, label: "Workshops" },
+  { number: 15, label: "Industry Mentors" }
+];
+
+const GALLERY = [
+  "/events/event1.jpeg",
+  "/events/event2.jpeg",
+  "/events/event3.jpeg",
+  "/events/event4.jpeg",
+  "/events/event5.jpeg",
+  "/events/event6.jpeg"
+];
+
 
 const Home = () => {
 
   const navigate = useNavigate();
   const { hash } = useLocation();
   const [startCounting, setStartCounting] = useState(false);
+  const { ref: statsRef, inView: statsInView } = useInView({ triggerOnce: true, rootMargin: "-100px 0px" });
 
   // ✅ FIX 1: scroll to top on page load
   useEffect(() => {
@@ -295,11 +316,11 @@ const Home = () => {
       {/* ABOUT */}
       <section
         id="about"
-        className={`drcloud-container py-16 md:py-24 space-y-8 ${SECTION_CLASS}`}
+        className={`drcloud-container py-12 md:py-16 space-y-6 ${SECTION_CLASS}`}
         data-aos="fade-up"
       >
 
-        <div className="space-y-8 text-center">
+        <div className="space-y-4 text-center">
 
           <h2 className="text-4xl md:text-5xl font-bold">
             <span className="text-slate-900">About </span>
@@ -311,18 +332,9 @@ const Home = () => {
             to excel in the cloud computing and DevOps landscape.
           </p>
 
-          <div className="flex justify-center">
-            <button
-              onClick={() => navigate('/our-story')}
-              className="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
-            >
-              OurStory
-            </button>
-          </div>
-
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 justify-items-center mt-28">
 
           {PILLARS.map((p) => (
 
@@ -347,49 +359,98 @@ const Home = () => {
 
         </div>
 
-        {/* WHAT THEY SAY */}
-<div
- className="space-y-8 mt-24 md:mt-32" 
-  data-aos="fade-up"
-  data-aos-delay="200"
->
-  <div className="text-center space-y-3">
-    <h3 className="text-3xl md:text-4xl font-bold">
-      <span className="text-slate-900">What They </span>
-      <span className="text-drcloudBlue">Say</span>
-    </h3>
+      </section>
 
-    <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
-      What our students and professionals who trusted DrCloud for their
-      career growth say about us.
-    </p>
-  </div>
-
-  <div className="grid gap-6 md:grid-cols-3">
-    {TESTIMONIALS.map((t) => (
-      <div
-        key={t.name}
-        className="drcloud-card px-6 py-6 flex flex-col justify-between h-full"
-        data-aos="fade-up"
-      >
-        <p className="text-sm text-slate-600 mb-4">
-          "{t.quote}"
-        </p>
-
-        <div className="mt-auto">
-          <div className="text-sm font-semibold text-slate-900">
-            {t.name}
-          </div>
-          <div className="text-xs text-drcloudBlue">
-            {t.company}
-          </div>
+      {/* WHAT THEY SAY */}
+      <section className="drcloud-container py-16 md:py-24 min-h-screen space-y-10" data-aos="fade-up">
+        <div className="text-center space-y-3">
+          <h3 className="text-3xl md:text-4xl font-bold">
+            <span className="text-slate-900">What They </span>
+            <span className="text-drcloudBlue">Say</span>
+          </h3>
+          <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
+            What our students and professionals who trusted DrCloud for their
+            career growth say about us.
+          </p>
         </div>
-      </div>
-    ))}
-  </div>
-</div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <div
+              key={t.name}
+              className="drcloud-card px-8 py-8 flex flex-col justify-between min-h-[420px]"
+              data-aos="fade-up"
+            >
+              <p className="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">
+                "{t.quote}"
+              </p>
+              <div className="mt-auto">
+                <div className="text-base font-semibold text-slate-900">
+                  {t.name}
+                </div>
+                <div className="text-sm text-drcloudBlue">
+                  {t.company}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* DRCLOUD MOMENTS */}
+      <section className="drcloud-container py-16 md:py-24 space-y-10" data-aos="fade-up">
+
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+            DrCloud Moments
+          </h2>
+        </div>
+
+        <PhotoProvider maskOpacity={0.9} photoClosable bannerVisible speed={() => 800}>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+
+            {GALLERY.map((img, index) => (
+              <PhotoView src={img} key={index}>
+
+                <div className="relative overflow-hidden rounded-xl cursor-pointer group">
+
+                  <img
+                    src={img}
+                    alt="Event"
+                    className="w-full h-60 object-cover transition duration-500 group-hover:scale-110"
+                  />
+
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition"></div>
+
+                </div>
+
+              </PhotoView>
+            ))}
+
+          </div>
+
+        </PhotoProvider>
 
       </section>
+
+      {/* COLLABORATORS */}
+      <Collaborators />
+
+      {/* STATS */}
+      <div ref={statsRef} className="drcloud-container py-10 md:py-14" data-aos="fade-up" data-aos-delay="300">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {STORY_STATS.map((stat) => (
+            <StatCard
+              key={stat.label}
+              label={stat.label}
+              value={stat.number}
+              suffix="+"
+              start={statsInView}
+            />
+          ))}
+        </div>
+      </div>
 
       {/* CONTACT */}
       <section
