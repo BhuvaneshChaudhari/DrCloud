@@ -12,6 +12,12 @@ import missionIcon from '../assets/mission.png';
 import communityIcon from '../assets/community.png';
 import innovationIcon from '../assets/innovation.png';
 import careerIcon from '../assets/career.png';
+import img1 from '../assets/img1.jpg';
+import img2 from '../assets/img2.jpg';
+import img3 from '../assets/img3.jpg';
+import img4 from '../assets/img4.jpg';
+import img5 from '../assets/img5.jpg';
+import img6 from '../assets/img6.jpg';
 
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
@@ -112,12 +118,12 @@ const STORY_STATS = [
 ];
 
 const GALLERY = [
-  "/events/event1.jpeg",
-  "/events/event2.jpeg",
-  "/events/event3.jpeg",
-  "/events/event4.jpeg",
-  "/events/event5.jpeg",
-  "/events/event6.jpeg"
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6
 ];
 
 
@@ -407,12 +413,10 @@ const Home = () => {
         </div>
 
         <PhotoProvider maskOpacity={0.9} photoClosable bannerVisible speed={() => 800}>
-
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
 
             {GALLERY.map((img, index) => (
               <PhotoView src={img} key={index}>
-
                 <div className="relative overflow-hidden rounded-xl cursor-pointer group">
 
                   <img
@@ -424,12 +428,10 @@ const Home = () => {
                   <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition"></div>
 
                 </div>
-
               </PhotoView>
             ))}
 
           </div>
-
         </PhotoProvider>
 
       </section>

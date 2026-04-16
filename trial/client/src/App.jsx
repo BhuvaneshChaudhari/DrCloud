@@ -8,7 +8,6 @@ import Training from './pages/Training.jsx';
 import CloudServices from './pages/CloudServices.jsx';
 import OtherServices from './pages/OtherServices.jsx';
 import Enquiry from './pages/Enquiry.jsx';
-import OurStory from './pages/OurStory.jsx';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -82,7 +81,6 @@ const App = () => {
           <Route path="/cloud-services" element={<CloudServices />} />
           <Route path="/other-services" element={<OtherServices />} />
           <Route path="/enquiry" element={<Enquiry />} />
-          <Route path="/our-story" element={<OurStory />} />
 
         </Routes>
       </main>
