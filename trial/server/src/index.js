@@ -24,6 +24,11 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+// ✅ ADD THIS
+app.get('/', (_req, res) => {
+  res.send('DrCloud API is running 🚀');
+});
+
 app.use('/api/enquiry', enquiryRoutes);
 app.use('/api/chat-enquiry', chatEnquiryRoutes);
 
