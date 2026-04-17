@@ -290,6 +290,7 @@ const StatDivider = () => (
 const Collaborators = () => {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
+  const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
     injectKeyframes();
@@ -321,7 +322,8 @@ const Collaborators = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: 30,
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? 40 : 30,
           flexWrap: "wrap",
           rowGap: 32,
         }}
@@ -337,7 +339,7 @@ const Collaborators = () => {
             animationDelay: "0ms",
           }}
         >
-          <BrandRing brand={BRANDS[0]} size={130} />
+          <BrandRing brand={BRANDS[0]} size={isMobile ? 100 : 130} />
           <span style={{ fontSize: 12, fontWeight: 600, color: "#475569", letterSpacing: "0.05em" }}>
             {BRANDS[0].label}
           </span>
@@ -345,7 +347,11 @@ const Collaborators = () => {
         </div>
 
         {/* Connector L */}
-        <Connector leftColor={BRANDS[0].color} rightColor={BRANDS[1].color} />
+        {isMobile ? (
+          <div style={{ fontSize: 20, color: "#64748b" }}>×</div>
+        ) : (
+          <Connector leftColor={BRANDS[0].color} rightColor={BRANDS[1].color} />
+        )}
 
         {/* DrCloud (central — larger) */}
         <div
@@ -359,7 +365,7 @@ const Collaborators = () => {
             zIndex: 1,
           }}
         >
-          <BrandRing brand={BRANDS[1]} size={170} />
+          <BrandRing brand={BRANDS[1]} size={isMobile ? 130 : 170} />
           <span style={{ fontSize: 13, fontWeight: 700, color: BRANDS[1].color, letterSpacing: "0.04em" }}>
             {BRANDS[1].label}
           </span>
@@ -367,7 +373,11 @@ const Collaborators = () => {
         </div>
 
         {/* Connector R */}
-        <Connector leftColor={BRANDS[1].color} rightColor={BRANDS[2].color} />
+        {isMobile ? (
+          <div style={{ fontSize: 20, color: "#64748b" }}>×</div>
+        ) : (
+          <Connector leftColor={BRANDS[1].color} rightColor={BRANDS[2].color} />
+        )}
 
         {/* Talenlio */}
         <div
@@ -380,7 +390,7 @@ const Collaborators = () => {
             animationDelay: "240ms",
           }}
         >
-          <BrandRing brand={BRANDS[2]} size={130} />
+          <BrandRing brand={BRANDS[2]} size={isMobile ? 100 : 130} />
           <span style={{ fontSize: 12, fontWeight: 600, color: "#475569", letterSpacing: "0.05em" }}>
             {BRANDS[2].label}
           </span>
