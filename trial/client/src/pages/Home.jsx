@@ -363,10 +363,10 @@ const Home = () => {
       {/* WHAT THEY SAY */}
       <section className="drcloud-container py-16 md:py-24 min-h-screen space-y-10" data-aos="fade-up">
         <div className="text-center space-y-3">
-          <h3 className="text-3xl md:text-4xl font-bold">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
             <span className="text-slate-900">What They </span>
             <span className="text-drcloudBlue">Say</span>
-          </h3>
+          </h2>
           <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
             What our students and professionals who trusted DrCloud for their
             career growth say about us.
@@ -401,7 +401,7 @@ const Home = () => {
 
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-            DrCloud Moments
+            DrCloud <span className="text-drcloudBlue">Moments</span>
           </h2>
         </div>
 
