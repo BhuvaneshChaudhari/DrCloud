@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import ilmtecLogo from "../assets/ilmtec_solutions_logo.jpeg";
+import ilmtecName from "../assets/ilmtecname.png";
 import drcloudLogo from "../assets/drlogo1.png";   // your logo
 import talenlioLogo from "../assets/talenlio.png";
+import talenlioName from "../assets/talenlioname.png";
 
 /* ─────────────────────── Keyframe injection ─────────────────────── */
 const KEYFRAMES = `
@@ -39,6 +41,7 @@ const BRANDS = [
   {
     key: "ilmtec",
     label: "ILMTEC",
+    nameImage: ilmtecName,
     sub: "Institute of Learning",
     color: "#0ea5e9",
     ringColor: "#0ea5e9",
@@ -58,6 +61,7 @@ const BRANDS = [
   {
     key: "talenlio",
     label: "Talenlio",
+    nameImage: talenlioName,
     sub: "Career Platform",
     color: "#7c3aed",
     ringColor: "#7c3aed",
@@ -334,15 +338,17 @@ const Collaborators = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 10,
+            gap: 8,
             animation: visible ? "fadeUp 0.7s ease both" : "none",
             animationDelay: "0ms",
           }}
         >
           <BrandRing brand={BRANDS[0]} size={isMobile ? 100 : 130} />
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#475569", letterSpacing: "0.05em" }}>
-            {BRANDS[0].label}
-          </span>
+          <img
+            src={BRANDS[0].nameImage}
+            alt={`${BRANDS[0].label} name`}
+            style={{ width: 96, maxWidth: "100%", height: "auto" }}
+          />
           <span style={{ fontSize: 10, color: "#94a3b8" }}>{BRANDS[0].sub}</span>
         </div>
 
@@ -385,15 +391,17 @@ const Collaborators = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 10,
+            gap: 8,
             animation: visible ? "fadeUp 0.7s ease both" : "none",
             animationDelay: "240ms",
           }}
         >
           <BrandRing brand={BRANDS[2]} size={isMobile ? 100 : 130} />
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#475569", letterSpacing: "0.05em" }}>
-            {BRANDS[2].label}
-          </span>
+          <img
+            src={BRANDS[2].nameImage}
+            alt={`${BRANDS[2].label} name`}
+            style={{ width: 96, maxWidth: "100%", height: "auto" }}
+          />
           <span style={{ fontSize: 10, color: "#94a3b8" }}>{BRANDS[2].sub}</span>
         </div>
       </div>

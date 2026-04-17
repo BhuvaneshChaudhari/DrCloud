@@ -91,20 +91,20 @@ const SECTION_CLASS = 'scroll-mt-24';
 
 const TESTIMONIALS = [
   {
-    name: "Rahul Sharma",
-    company: "AWS Engineer",
+    name: "Atharva Gawali",
+    company: "Johnson Controls Placement",
     quote:
       "DrCloud transformed my career. The hands-on training, real-time project exposure, and dedicated mentorship helped me land my dream cloud role. The practical labs and interview preparation sessions made a huge difference in my confidence and technical depth."
   },
   {
-    name: "Sneha Patil",
-    company: "DevOps Consultant",
+    name: "Rounak",
+    company: "Talenio Placement",
     quote:
       "The curriculum is industry-focused and practical. I gained real-world skills in CI/CD, cloud deployment, and automation that boosted my confidence. The structured roadmap and continuous guidance ensured I stayed on track throughout my learning journey."
   },
   {
-    name: "Amit Verma",
-    company: "Cloud Architect",
+    name: "Trupti Wankhede",
+    company: "Johnson Controls Placement",
     quote:
       "Excellent support and guidance throughout the journey. From foundational concepts to advanced cloud architecture, everything was explained clearly. The mock interviews, resume reviews, and career mentorship were incredibly valuable. Highly recommended for serious cloud aspirants."
   }
