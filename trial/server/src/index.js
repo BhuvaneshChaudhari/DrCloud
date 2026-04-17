@@ -1,10 +1,12 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { connectDb } from './config/db.js';
 import enquiryRoutes from './routes/enquiryRoutes.js';
+import chatEnquiryRoutes from './routes/chatEnquiryRoutes.js';
 
 const app = express();
 
@@ -16,12 +18,14 @@ app.use(
 );
 app.use(express.json());
 app.use(morgan('tiny'));
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
 app.use('/api/enquiry', enquiryRoutes);
+app.use('/api/chat-enquiry', chatEnquiryRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -40,4 +44,5 @@ const start = async () => {
 };
 
 start();
+
 

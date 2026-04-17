@@ -34,19 +34,26 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
   
     try {
-      // ✅ REAL API CALL
-      await apiClient.post("/api/enquiry", {
+      setSubmitting(true);
+
+      const payload = {
         name: form.fullName.trim(),
         email: form.email,
         phone: form.phone,
-        serviceType: form.serviceType,
-      });
+        message: form.serviceType,
+
+      };
+
+
+      // ✅ REAL API CALL
+      await apiClient.post("/api/chat-enquiry", payload); 
   
       setStatus("success");
       setForm(initialState);
+
+
       if (onSuccess) onSuccess();
   
     } catch {

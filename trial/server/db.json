@@ -1,0 +1,40 @@
+{
+  "enquiries": [
+    {
+      "_id": "69e20f82f907ae1b2c8a9553",
+      "name": "Rashi Goyal",
+      "email": "rashi08goyal@gmail.com",
+      "phone": "6268938436",
+      "serviceType": "DevOps Bootcamp",
+      "message": "Enquiry regarding DevOps Bootcamp",
+      "createdAt": "2026-04-17T10:46:26.475Z"
+    },
+    {
+      "_id": "69e21049307ccf41e9b0ca03",
+      "name": "Rashi  Goyal",
+      "email": "rashi08goyal@gmail.com",
+      "phone": "6268938436",
+      "serviceType": "DevOps Bootcamp",
+      "message": "xayrhwknekhflefn",
+      "createdAt": "2026-04-17T10:49:45.006Z"
+    },
+    {
+      "_id": "69e2111f2d89ee3487a5dbd3",
+      "name": "Rashi Goyal",
+      "email": "rashi08goyal@gmail.com",
+      "phone": "6268938436",
+      "serviceType": "DevOps Bootcamp",
+      "message": "shuvbcjmabjaskl v",
+      "createdAt": "2026-04-17T10:53:19.812Z"
+    },
+    {
+      "_id": "69e21c7b624ecf4aec6feb2b",
+      "name": "Rashi Goyal",
+      "email": "rashi08goyal@gmail.com",
+      "phone": "6268938436",
+      "serviceType": "CSR Project Training",
+      "message": "ahksuhvkvnkjeofv",
+      "createdAt": "2026-04-17T11:41:47.727Z"
+    }
+  ]
+}

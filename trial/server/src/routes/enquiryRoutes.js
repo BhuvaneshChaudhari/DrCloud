@@ -3,6 +3,8 @@ import xss from 'xss';
 import validator from 'validator';
 import Enquiry from '../models/Enquiry.js';
 import { createTransporter, buildEnquiryEmail } from '../config/email.js';
+import { Low } from 'lowdb';
+import { JSONFile } from 'lowdb/node';
 
 const router = express.Router();
 
@@ -30,6 +32,9 @@ router.post('/', async (req, res) => {
     if (!serviceType) {
       return res.status(400).json({ message: 'Service type is required.' });
     }
+    if (!message || message.length < 10) {
+      return res.status(400).json({ message: 'Message should be at least 10 characters.' });
+    }
 
     const enquiry = await Enquiry.create({
       name,
@@ -38,6 +43,22 @@ router.post('/', async (req, res) => {
       serviceType,
       message
     });
+
+    const adapter = new JSONFile('db.json');
+    const defaultData = { enquiries: [] };
+    const db = new Low(adapter, defaultData);
+    await db.read();
+    db.data ||= { enquiries: [] };
+    db.data.enquiries.push({
+      _id: enquiry._id,
+      name: enquiry.name,
+      email: enquiry.email,
+      phone: enquiry.phone,
+      serviceType: enquiry.serviceType,
+      message: enquiry.message,
+      createdAt: enquiry.createdAt
+    });
+    await db.write();
 
     const transporter = createTransporter();
     const { subject, text, html } = buildEnquiryEmail(enquiry);
@@ -61,4 +82,3 @@ router.post('/', async (req, res) => {
 });
 
 export default router;
-

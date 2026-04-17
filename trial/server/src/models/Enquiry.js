@@ -29,7 +29,7 @@ const enquirySchema = new mongoose.Schema(
     },
     message: {
       type: String,
-      required: false,
+      required: true,
       trim: true,
       maxlength: 2000
     },
