@@ -110,13 +110,6 @@ const TESTIMONIALS = [
   }
 ];
 
-const STORY_STATS = [
-  { number: 500, label: "Students Trained" },
-  { number: 120, label: "Placements" },
-  { number: 20, label: "Workshops" },
-  { number: 15, label: "Industry Mentors" }
-];
-
 const GALLERY = [
   img1,
   img2,
@@ -439,20 +432,6 @@ const Home = () => {
       {/* COLLABORATORS */}
       <Collaborators />
 
-      {/* STATS */}
-      <div ref={statsRef} className="drcloud-container py-10 md:py-14" data-aos="fade-up" data-aos-delay="300">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {STORY_STATS.map((stat) => (
-            <StatCard
-              key={stat.label}
-              label={stat.label}
-              value={stat.number}
-              suffix="+"
-              start={statsInView}
-            />
-          ))}
-        </div>
-      </div>
 
       {/* CONTACT */}
       <section
