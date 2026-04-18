@@ -212,7 +212,7 @@ const Home = () => {
             data-aos="fade-up"
             data-aos-delay="300"
           >
-            <StatCard label="Students Enrolled" value={1200} suffix="+" start={startCounting} />
+            <StatCard label="Students Enrolled" value={1000} suffix="+" start={startCounting} />
             <StatCard label="Success Rate" value={98} suffix="%" start={startCounting} />
             <StatCard label="AWS Services" value={50} suffix="+" start={startCounting} />
             <StatCard label="Support" value={24} suffix="/7" start={startCounting} />

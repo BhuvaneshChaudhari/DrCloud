@@ -1,4 +1,5 @@
 import footerLogo from '../assets/drlogo.png';
+import instagramIcon from '../assets/Instagram_icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -58,6 +59,22 @@ const Footer = () => {
                   </svg>
                 </a>
                 <span className="text-sm text-slate-600">Follow us on LinkedIn</span>
+              </div>
+              <div className="flex items-center gap-3 mt-2">
+                <a
+                  href="https://www.instagram.com/drcloud.official?igsh=MTFtbXVpYWJmcnMyeA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center transition-transform duration-300 hover:scale-110 hover:shadow-lg rounded-full p-1"
+                  aria-label="DrCloud Instagram"
+                >
+                  <img
+                    src={instagramIcon}
+                    alt="Instagram"
+                    className="w-5 h-5"
+                  />
+                </a>
+                <span className="text-sm text-slate-600">Follow us on Instagram</span>
               </div>
             </div>
           </div>
