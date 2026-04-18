@@ -280,7 +280,7 @@ const Chatbot = () => {
       {/* ── Chat window ── */}
       {isOpen && (
         <div
-          className="fixed bottom-10 right-10 z-50 w-[390px] h-[560px] max-w-[95vw] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
+          className="drcloud-chat-window fixed bottom-10 right-10 z-50 w-[330px] md:w-[390px] h-[560px] max-w-[95vw] max-h-[95vh] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
           style={{
             backgroundImage: `url(${cloudBg})`,
             backgroundSize: "cover",

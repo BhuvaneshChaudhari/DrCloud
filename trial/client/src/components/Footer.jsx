@@ -5,19 +5,11 @@ import { useEffect, useState } from 'react';
 
 const Footer = () => {
   const navigate = useNavigate();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
-  // Fade-in on scroll
+  // Keep footer always visible on mobile and desktop
   useEffect(() => {
-    const handleScroll = () => {
-      const footer = document.getElementById('footer-section');
-      if (!footer) return;
-      const rect = footer.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 50) setVisible(true);
-    };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    setVisible(true);
   }, []);
 
   return (
