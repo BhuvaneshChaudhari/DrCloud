@@ -1,7 +1,5 @@
 {
-  "root": "trial/client",
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
