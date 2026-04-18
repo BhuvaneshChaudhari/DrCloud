@@ -1,4 +1,6 @@
 {
+  "root": "trial/client",
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]

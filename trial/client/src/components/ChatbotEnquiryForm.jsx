@@ -32,6 +32,7 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
