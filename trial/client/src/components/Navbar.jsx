@@ -12,24 +12,22 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Reset activeSection when navigating away from home
   useEffect(() => {
     if (!isHome) {
       setActiveSection('');
     }
   }, [pathname, isHome]);
 
+  // ❌ CSR removed from section tracking
   useEffect(() => {
-    // Only observe sections if we're on the home page
     if (!isHome) return;
 
     const sections = ['services', 'about', 'contact'];
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,7 +44,6 @@ const Navbar = () => {
       if (el) observer.observe(el);
     });
 
-    // Check if we're at the top of the page (home section)
     const handleScroll = () => {
       if (window.scrollY < 200) {
         setActiveSection('');
@@ -100,90 +97,110 @@ const Navbar = () => {
         <div className="flex items-center gap-6">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
+            
             <button
               onClick={handleHomeClick}
-              className={`${navLinkBase} ${isHome && !activeSection ? 'bg-sky-100 text-drcloudBlue animate-slideIn' : 'text-slate-700'}`}
+              className={`${navLinkBase} ${
+                isHome && !activeSection
+                  ? 'bg-sky-100 text-drcloudBlue'
+                  : 'text-slate-700'
+              }`}
             >
               Home
             </button>
 
             <button
               onClick={() => goToSection('services')}
-              className={`${navLinkBase} ${activeSection === 'services' ? 'bg-sky-100 text-drcloudBlue animate-slideIn' : 'text-slate-700'}`}
+              className={`${navLinkBase} ${
+                activeSection === 'services'
+                  ? 'bg-sky-100 text-drcloudBlue'
+                  : 'text-slate-700'
+              }`}
             >
               Services
             </button>
 
+            {/* ✅ CSR = PAGE NOW */}
+            <button
+              onClick={() => navigate('/csr')}
+              className={`${navLinkBase} ${
+                pathname === '/csr'
+                  ? 'bg-sky-100 text-drcloudBlue'
+                  : 'text-slate-700'
+              }`}
+            >
+              CSR Project
+            </button>
+
             <button
               onClick={() => goToSection('about')}
-              className={`${navLinkBase} ${activeSection === 'about' ? 'bg-sky-100 text-drcloudBlue animate-slideIn' : 'text-slate-700'}`}
+              className={`${navLinkBase} ${
+                activeSection === 'about'
+                  ? 'bg-sky-100 text-drcloudBlue'
+                  : 'text-slate-700'
+              }`}
             >
               About
             </button>
 
             <button
               onClick={() => goToSection('contact')}
-              className={`${navLinkBase} ${activeSection === 'contact' ? 'bg-sky-100 text-drcloudBlue animate-slideIn' : 'text-slate-700'}`}
+              className={`${navLinkBase} ${
+                activeSection === 'contact'
+                  ? 'bg-sky-100 text-drcloudBlue'
+                  : 'text-slate-700'
+              }`}
             >
               Contact Us
             </button>
           </nav>
 
-          {/* Desktop Get Started Button */}
+          {/* Get Started */}
           <button
             onClick={() => navigate('/enquiry')}
-            className="hidden sm:inline-flex drcloud-pill-primary text-sm !text-white hover:!text-white"
+            className="hidden sm:inline-flex drcloud-pill-primary text-sm !text-white"
           >
-            Get Started
+            Book Consultation
           </button>
 
-          {/* Mobile Hamburger Menu Button */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-white/20 transition"
-            aria-label="Toggle menu"
           >
-            <span className={`block h-0.5 w-6 bg-slate-900 transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block h-0.5 w-6 bg-slate-900 transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block h-0.5 w-6 bg-slate-900 transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            <span className={`h-0.5 w-6 bg-slate-900 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`h-0.5 w-6 bg-slate-900 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`h-0.5 w-6 bg-slate-900 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-white/60 animate-slideDown">
+        <div className="md:hidden bg-white/95 border-t animate-slideDown">
           <nav className="drcloud-container py-4 space-y-2">
+
+            <button onClick={handleHomeClick} className="nav-mobile">Home</button>
+            <button onClick={() => goToSection('services')} className="nav-mobile">Services</button>
+
+            {/* ✅ CSR MOBILE */}
             <button
-              onClick={handleHomeClick}
-              className="block w-full text-left px-4 py-2 rounded-lg text-slate-700 hover:bg-sky-100 hover:text-drcloudBlue transition"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate('/csr');
+              }}
+              className="nav-mobile"
             >
-              Home
+              CSR Project
             </button>
-            <button
-              onClick={() => goToSection('services')}
-              className="block w-full text-left px-4 py-2 rounded-lg text-slate-700 hover:bg-sky-100 hover:text-drcloudBlue transition"
-            >
-              Services
-            </button>
-            <button
-              onClick={() => goToSection('about')}
-              className="block w-full text-left px-4 py-2 rounded-lg text-slate-700 hover:bg-sky-100 hover:text-drcloudBlue transition"
-            >
-              About Us
-            </button>
-            <button
-              onClick={() => goToSection('contact')}
-              className="block w-full text-left px-4 py-2 rounded-lg text-slate-700 hover:bg-sky-100 hover:text-drcloudBlue transition"
-            >
-              Contact Us
-            </button>
-            <button
-              onClick={handleGetStarted}
-              className="block w-full mt-4 drcloud-pill-primary text-sm !text-white hover:!text-white"
-            >
+
+            <button onClick={() => goToSection('about')} className="nav-mobile">About Us</button>
+            <button onClick={() => goToSection('contact')} className="nav-mobile">Contact Us</button>
+
+            <button onClick={handleGetStarted} className="block w-full mt-4 drcloud-pill-primary text-sm !text-white">
               Get Started
             </button>
+
           </nav>
         </div>
       )}
