@@ -131,7 +131,7 @@ const Training = () => {
       </div>
 
       {/* CSR Card */}
-      <div className="grid gap-6 md:grid-cols-3 mt-8">
+      {/* <div className="grid gap-6 md:grid-cols-3 mt-8">
 
         <div className="md:col-start-2">
 
@@ -150,7 +150,7 @@ const Training = () => {
 
         </div>
 
-      </div>
+      </div> */}
 
       {/* CTA */}
       <div className="text-center mt-12 space-y-4">

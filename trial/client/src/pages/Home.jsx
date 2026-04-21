@@ -19,6 +19,7 @@ import img4 from '../assets/img4.jpg';
 import img5 from '../assets/img5.jpg';
 import img6 from '../assets/img6.jpg';
 
+
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -84,7 +85,7 @@ const PILLARS = [
 ];
 
 
-// ✅ FIXED OFFSET
+// FIXED OFFSET
 const SECTION_CLASS = 'scroll-mt-24';
 
 
@@ -93,20 +94,23 @@ const TESTIMONIALS = [
   {
     name: "Atharva Gawali",
     company: "Johnson Controls Placement",
+    rating: 4,
     quote:
-      "DrCloud transformed my career. The hands-on training, real-time project exposure, and dedicated mentorship helped me land my dream cloud role. The practical labs and interview preparation sessions made a huge difference in my confidence and technical depth."
+      "DrCloud transformed my career. The hands-on training and mentorship helped me land my dream cloud role."
   },
   {
     name: "Rounak",
     company: "Talenio Placement",
+    rating: 5,
     quote:
-      "The curriculum is industry-focused and practical. I gained real-world skills in CI/CD, cloud deployment, and automation that boosted my confidence. The structured roadmap and continuous guidance ensured I stayed on track throughout my learning journey."
+      "Industry-focused curriculum and real-world projects boosted my confidence massively."
   },
   {
     name: "Trupti Wankhede",
     company: "Johnson Controls Placement",
+    rating: 4.5,
     quote:
-      "Excellent support and guidance throughout the journey. From foundational concepts to advanced cloud architecture, everything was explained clearly. The mock interviews, resume reviews, and career mentorship were incredibly valuable. Highly recommended for serious cloud aspirants."
+      "Excellent support, mock interviews, and mentorship. Highly recommended."
   }
 ];
 
@@ -127,7 +131,7 @@ const Home = () => {
   const [startCounting, setStartCounting] = useState(false);
   const { ref: statsRef, inView: statsInView } = useInView({ triggerOnce: true, rootMargin: "-100px 0px" });
 
-  // ✅ FIX 1: scroll to top on page load
+  //  FIX 1: scroll to top on page load
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -143,7 +147,7 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ FIX 2: proper alignment with navbar offset
+  //  FIX 2: proper alignment with navbar offset
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '');
@@ -312,6 +316,8 @@ const Home = () => {
 
       </section>
 
+            
+
       {/* ABOUT */}
       <section
         id="about"
@@ -361,40 +367,67 @@ const Home = () => {
       </section>
 
       {/* WHAT THEY SAY */}
-      <section className="drcloud-container py-16 md:py-24 min-h-screen space-y-10" data-aos="fade-up">
-        <div className="text-center space-y-3">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-            <span className="text-slate-900">What They </span>
-            <span className="text-drcloudBlue">Say</span>
-          </h2>
-          <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
-            What our students and professionals who trusted DrCloud for their
-            career growth say about us.
-          </p>
-        </div>
+      {/* ================= WHAT THEY SAY ================= */}
+<section className="py-20 overflow-hidden" data-aos="fade-up">
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t) => (
-            <div
-              key={t.name}
-              className="drcloud-card px-8 py-8 flex flex-col justify-between min-h-[420px]"
-              data-aos="fade-up"
-            >
-              <p className="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">
-                "{t.quote}"
-              </p>
-              <div className="mt-auto">
-                <div className="text-base font-semibold text-slate-900">
-                  {t.name}
-                </div>
-                <div className="text-sm text-drcloudBlue">
-                  {t.company}
-                </div>
+  <div className="drcloud-container space-y-10">
+
+    {/* HEADING */}
+    <div className="text-center space-y-3">
+      <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+        Loved by <span className="text-drcloudBlue">Learners</span>
+      </h2>
+      <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
+        Real stories from students who transformed their careers with DrCloud
+      </p>
+    </div>
+
+    {/*  AUTO SCROLL STRIP */}
+    <div className="relative overflow-hidden">
+
+      {/* gradient fade */}
+      <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
+      <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
+
+      <div className="flex gap-6 animate-scroll">
+
+        {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+          <div
+            key={i}
+            className="drcloud-card p-6 w-[300px] shrink-0 flex flex-col justify-between hover:shadow-xl transition whitespace-normal break-words"
+          >
+
+            {/* ⭐ STARS */}
+            <div className="flex gap-1 mb-3 text-yellow-400 text-sm">
+              {Array.from({ length: t.rating }).map((_, i) => (
+                <span key={i}>★</span>
+              ))}
+            </div>
+
+            {/* TEXT */}
+            <p className="text-sm text-slate-600 leading-relaxed mb-4 break-words">
+              "{t.quote}"
+            </p>
+
+            {/* USER */}
+            <div>
+              <div className="text-sm font-semibold text-slate-900">
+                {t.name}
+              </div>
+              <div className="text-xs text-drcloudBlue">
+                {t.company}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+
+          </div>
+        ))}
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
 
       {/* DRCLOUD MOMENTS */}
       <section className="drcloud-container py-16 md:py-24 space-y-10" data-aos="fade-up">
