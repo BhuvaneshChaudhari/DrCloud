@@ -125,7 +125,7 @@ const CSR = () => {
         {/* RIGHT SIDE - IMAGE */}
        
 <div
-  className="relative flex items-center justify-center"
+  className="relative flex flex-col items-center justify-center py-6 md:py-0"
   data-aos="fade-up"
   data-aos-delay="200"
 >
@@ -140,12 +140,12 @@ const CSR = () => {
   <img
     src={awsLogo2}
     alt="AWS re/Start"
-    className="relative z-10 w-[260px] md:w-[420px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] transition duration-500 hover:scale-105 animate-float"
+    className="relative z-10 w-[260px] md:w-[420px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] transition duration-500 hover:scale-105 animate-float my-8 md:my-0"
   />
 
   {/*  COMBINED FLOATING BADGE */}
  
-<div className="absolute bottom-[120px] md:bottom-[-80px] z-20 flex gap-4 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-xl text-xs font-medium animate-float">
+<div className="relative md:absolute md:bottom-[-80px] z-20 flex gap-4 px-6 py-3 rounded-2xl bg-white/90 backdrop-blur-md shadow-xl text-xs font-medium animate-float mt-4 md:mt-0">
 
   <span className="flex items-center gap-2 hover:scale-105 transition">
     🎓 Certification
