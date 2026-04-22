@@ -7,9 +7,9 @@ import devopsIcon from "../assets/devops-icon.png";
 import iacIcon from "../assets/iac-icon.png";
 import csrIcon from "../assets/csr-icon.png";
 
-const TrainingCard = ({ icon, title, description, bullets }) => {
+const TrainingCard = ({ icon, title, description, bullets, ...props }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80">
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80" {...props}>
       <div className="flex-1">
         <img
           src={icon}
@@ -59,6 +59,8 @@ const Training = () => {
       <div className="grid gap-6 md:grid-cols-3">
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           icon={awsIcon}
           title="AWS"
           description="Comprehensive AWS certification training covering core services and architectures."
@@ -71,6 +73,8 @@ const Training = () => {
         />
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           icon={azureIcon}
           title="Azure"
           description="Azure certification training focused on AZ-900 and AZ-104 with real-world labs."
@@ -83,6 +87,8 @@ const Training = () => {
         />
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="300"
           icon={gcpIcon}
           title="GCP"
           description="Master deploying and managing scalable systems on Google Cloud Platform."
@@ -95,6 +101,8 @@ const Training = () => {
         />
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           icon={dockerIcon}
           title="Docker and Kubernetes"
           description="Master containerization, orchestration, and CI/CD with Docker and Kubernetes."
@@ -106,6 +114,8 @@ const Training = () => {
         />
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           icon={devopsIcon}
           title="DevOps Bootcamp"
           description="End-to-end CI/CD pipelines and DevOps automation with real projects."
@@ -117,6 +127,8 @@ const Training = () => {
         />
 
         <TrainingCard
+          data-aos="fade-up"
+          data-aos-delay="300"
           icon={iacIcon}
           title="Infrastructure as Code"
           description="Provision and manage cloud infrastructure using modern IaC tools."

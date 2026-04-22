@@ -307,7 +307,7 @@ const Collaborators = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="drcloud-container py-14 md:py-20">
+    <section ref={sectionRef} className="drcloud-container py-14 md:py-20" data-aos="fade-up">
 
       {/* Heading */}
       <h2 className="text-4xl md:text-5xl font-bold text-center">

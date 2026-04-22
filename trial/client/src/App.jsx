@@ -20,7 +20,9 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Refresh AOS to re-trigger animations after scroll
+    setTimeout(() => AOS.refresh(), 100);
   }, [pathname]);
 
   return null;
@@ -37,6 +39,9 @@ const App = () => {
       once: true,
       easing: 'ease-in-out',
     });
+    // Prevent browser scroll restoration and ensure start at top
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, []);
 
   // ✅ Refresh AOS on route change

@@ -49,8 +49,8 @@ const StatCard = ({ label, value, suffix = "", prefix = "", start }) => (
 );
 
 
-const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon }) => (
-  <div className="drcloud-card px-6 py-5 flex flex-col h-full">
+const ServiceCard = ({ title, description, bullets, buttonLabel, onClick, icon, ...props }) => (
+  <div className="drcloud-card px-6 py-5 flex flex-col h-full" {...props}>
     <div className="flex flex-col items-center text-center gap-2">
       <img src={icon} alt={title} className="w-14 h-14 object-contain" />
       <h3 className="text-2xl font-bold text-slate-900 mb-3 text-center">{title}</h3>
@@ -268,6 +268,8 @@ const Home = () => {
         <div className="grid gap-6 md:grid-cols-3">
 
           <ServiceCard
+            data-aos="fade-up"
+            data-aos-delay="100"
             icon={coursesIcon}
             title="Courses"
             description="Learn modern technologies and prepare confidently for today's IT careers."
@@ -284,6 +286,8 @@ const Home = () => {
           />
 
           <ServiceCard
+            data-aos="fade-up"
+            data-aos-delay="200"
             icon={cloudIcon}
             title="Cloud Services"
             description="Scalable and secure services designed to store data and run applications efficiently."
@@ -299,6 +303,8 @@ const Home = () => {
           />
 
           <ServiceCard
+            data-aos="fade-up"
+            data-aos-delay="300"
             icon={otherIcon}
             title="Other Services"
             description="Enhance your learning experience with comprehensive support."
