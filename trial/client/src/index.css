@@ -319,8 +319,8 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
     bottom: 1rem !important;
     width: auto !important;
     max-width: calc(100vw - 2rem) !important;
-    height: auto !important;
-    max-height: calc(100vh - 2rem) !important;
+    height: 520px !important;
+    max-height: 520px !important;
   }
 
   .aos-init {

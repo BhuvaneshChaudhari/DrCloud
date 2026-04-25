@@ -59,12 +59,23 @@ const Navbar = () => {
   }, [isHome]);
 
   const goToSection = (section) => {
-    setMobileMenuOpen(false);
-    if (isHome && hash === `#${section}`) {
-      const el = document.getElementById(section);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        if (isHome) {
+          const el = document.getElementById(section);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          navigate(`/#${section}`);
+        }
+      }, 300);
     } else {
-      navigate(`/#${section}`);
+      if (isHome && hash === `#${section}`) {
+        const el = document.getElementById(section);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        navigate(`/#${section}`);
+      }
     }
   };
 

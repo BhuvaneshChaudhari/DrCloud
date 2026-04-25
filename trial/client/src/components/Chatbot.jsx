@@ -10,7 +10,7 @@ const translations = {
   en: {
     quickReplies: {
       services: "Browse Services",
-      
+
       enquiry: "Enquiry Form",
       contact: "Contact Us",
       changeLanguage: "Change Language"
@@ -175,10 +175,10 @@ const Chatbot = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, serviceOptions, isTyping]);
 
-  const openChat = () => { 
+  const openChat = () => {
     setEntryMethod('manual');
-    setIsOpen(true); 
-    setVisible(true); 
+    setIsOpen(true);
+    setVisible(true);
   };
 
   const closeChat = () => {
@@ -233,7 +233,18 @@ const Chatbot = () => {
       }
       setMessages(prev => [...prev, { id: `bot-${Date.now()}`, from: "bot", text: config.text, isNew: true }]);
       setLastSelected(id);
-      if (config.navigateTo) navigate(config.navigateTo);
+      if (config.navigateTo) {
+        setTimeout(() => {
+          navigate(config.navigateTo);
+          if (window.innerWidth < 768) {
+            setTimeout(() => {
+              const section = config.navigateTo.replace('/', '');
+              const el = document.getElementById(section);
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 800);
+          }
+        }, 200);
+      }
       setIsTyping(false);
       if (id === "services") {
         setServiceOptions([
@@ -285,8 +296,8 @@ const Chatbot = () => {
             backgroundImage: `url(${cloudBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            animation: visible 
-              ? (entryMethod === 'auto' ? 'slowFadeIn 1.5s ease-out both' : 'windowIn 0.45s cubic-bezier(0.34,1.4,0.64,1) both') 
+            animation: visible
+              ? (entryMethod === 'auto' ? 'slowFadeIn 1.5s ease-out both' : 'windowIn 0.45s cubic-bezier(0.34,1.4,0.64,1) both')
               : 'windowOut 0.3s ease both'
           }}
         >
@@ -431,7 +442,7 @@ const Chatbot = () => {
                               setMessages(prev => [...prev, { id: `bot-${Date.now()}`, from: "bot", text: option.text, isNew: true }]);
                               setLastSelected(option.id);
                               setIsTyping(false);
-                              navigate(option.navigateTo);
+                              setTimeout(() => navigate(option.navigateTo), 200);
                             }, 1000);
                           }}
                         >

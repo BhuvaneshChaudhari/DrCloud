@@ -203,7 +203,14 @@ const Home = () => {
             </button>
 
             <button
-              onClick={() => navigate('/#services')}
+              onClick={() => {
+                if (window.innerWidth < 768) {
+                  const el = document.getElementById('services');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                  navigate('/#services');
+                }
+              }}
               className="text-sm px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-800 transition duration-200"
             >
               View Our Services
@@ -322,7 +329,7 @@ const Home = () => {
 
       </section>
 
-            
+
 
       {/* ABOUT */}
       <section
@@ -374,66 +381,66 @@ const Home = () => {
 
       {/* WHAT THEY SAY */}
       {/* ================= WHAT THEY SAY ================= */}
-<section className="py-20 overflow-hidden" data-aos="fade-up">
+      <section className="py-20 overflow-hidden" data-aos="fade-up">
 
-  <div className="drcloud-container space-y-10">
+        <div className="drcloud-container space-y-10">
 
-    {/* HEADING */}
-    <div className="text-center space-y-3">
-      <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-        Loved by <span className="text-drcloudBlue">Learners</span>
-      </h2>
-      <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
-        Real stories from students who transformed their careers with DrCloud
-      </p>
-    </div>
-
-    {/*  AUTO SCROLL STRIP */}
-    <div className="relative overflow-hidden">
-
-      {/* gradient fade */}
-      <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
-      <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
-
-      <div className="flex gap-6 animate-scroll">
-
-        {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
-          <div
-            key={i}
-            className="drcloud-card p-6 w-[300px] shrink-0 flex flex-col justify-between hover:shadow-xl transition whitespace-normal break-words"
-          >
-
-            {/* ⭐ STARS */}
-            <div className="flex gap-1 mb-3 text-yellow-400 text-sm">
-              {Array.from({ length: t.rating }).map((_, i) => (
-                <span key={i}>★</span>
-              ))}
-            </div>
-
-            {/* TEXT */}
-            <p className="text-sm text-slate-600 leading-relaxed mb-4 break-words">
-              "{t.quote}"
+          {/* HEADING */}
+          <div className="text-center space-y-3">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+              Loved by <span className="text-drcloudBlue">Learners</span>
+            </h2>
+            <p className="text-sm md:text-lg text-slate-600 max-w-2xl mx-auto">
+              Real stories from students who transformed their careers with DrCloud
             </p>
-
-            {/* USER */}
-            <div>
-              <div className="text-sm font-semibold text-slate-900">
-                {t.name}
-              </div>
-              <div className="text-xs text-drcloudBlue">
-                {t.company}
-              </div>
-            </div>
-
           </div>
-        ))}
 
-      </div>
-    </div>
+          {/*  AUTO SCROLL STRIP */}
+          <div className="relative overflow-hidden">
 
-  </div>
+            {/* gradient fade */}
+            <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
 
-</section>
+            <div className="flex gap-6 animate-scroll">
+
+              {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+                <div
+                  key={i}
+                  className="drcloud-card p-6 w-[300px] shrink-0 flex flex-col justify-between hover:shadow-xl transition whitespace-normal break-words"
+                >
+
+                  {/* ⭐ STARS */}
+                  <div className="flex gap-1 mb-3 text-yellow-400 text-sm">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <span key={i}>★</span>
+                    ))}
+                  </div>
+
+                  {/* TEXT */}
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4 break-words">
+                    "{t.quote}"
+                  </p>
+
+                  {/* USER */}
+                  <div>
+                    <div className="text-sm font-semibold text-slate-900">
+                      {t.name}
+                    </div>
+                    <div className="text-xs text-drcloudBlue">
+                      {t.company}
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
 
       {/* DRCLOUD MOMENTS */}
       <section className="drcloud-container py-16 md:py-24 space-y-10" data-aos="fade-up">
