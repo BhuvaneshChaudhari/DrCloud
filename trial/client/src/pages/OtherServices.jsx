@@ -8,9 +8,9 @@ import placementSupport from "../assets/placement-support.png";
 import oneToOneMentorship from "../assets/one-to-one-mentorship.png";
 import communityNetworking from "../assets/community-networking.png";
 
-const OtherCard = ({ icon, title, description, bullets }) => {
+const OtherCard = ({ icon, title, description, bullets, ...props }) => {
   return (
-    <div className="drcloud-card px-6 py-6 flex flex-col justify-between h-full min-h-[320px] text-center">
+    <div className="drcloud-card px-6 py-6 flex flex-col justify-between h-full min-h-[320px] text-center" {...props}>
 
       {/* Icon */}
       <div className="flex justify-center mb-3">
@@ -69,6 +69,8 @@ const OtherServices = () => {
       <div className="grid gap-6 md:grid-cols-3 items-stretch">
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           icon={expertInstructor}
           title="Expert Instructors"
           description="Learn from industry professionals with years of real-world experience in cloud and DevOps."
@@ -80,6 +82,8 @@ const OtherServices = () => {
         />
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           icon={certificationSupport}
           title="Certification Support"
           description="Get comprehensive preparation for AWS, Azure, GCP, and other industry-recognized certifications."
@@ -91,6 +95,8 @@ const OtherServices = () => {
         />
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="300"
           icon={handsOnLabs}
           title="Hands-on Labs"
           description="Practice with real cloud environments and build projects you can showcase to employers."
@@ -102,6 +108,8 @@ const OtherServices = () => {
         />
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           icon={placementSupport}
           title="Placement Support"
           description="We support you even after you complete your course to accelerate your career."
@@ -113,6 +121,8 @@ const OtherServices = () => {
         />
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           icon={oneToOneMentorship}
           title="One to One Mentorship"
           description="Personalised mentorship for your chosen course, going deep into topics with industry experts."
@@ -124,6 +134,8 @@ const OtherServices = () => {
         />
 
         <OtherCard
+          data-aos="fade-up"
+          data-aos-delay="300"
           icon={communityNetworking}
           title="Community & Networking"
           description="Join a vibrant community of learners and professionals to collaborate, share knowledge, and grow."

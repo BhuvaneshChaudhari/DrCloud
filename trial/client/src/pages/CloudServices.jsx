@@ -4,9 +4,9 @@ import cloudIcon from '../assets/cloud22.png';
 import devopsIcon from '../assets/devops.png';
 import bigDataIcon from '../assets/big_data.png';
 
-const CloudCard = ({ icon, title, description, bullets }) => {
+const CloudCard = ({ icon, title, description, bullets, ...props }) => {
   return (
-    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80">
+    <div className="drcloud-card px-6 py-6 space-y-3 flex flex-col min-h-80" {...props}>
 
       {/* ICON */}
       <div className="flex justify-center mb-0.5">
@@ -61,6 +61,8 @@ const CloudServices = () => {
       <div className="grid gap-6 md:grid-cols-3">
 
         <CloudCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           icon={cloudIcon}
           title="Cloud"
           description="Advanced and secure cloud computing solutions tailored to your business."
@@ -72,6 +74,8 @@ const CloudServices = () => {
         />
 
         <CloudCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           icon={devopsIcon}
           title="DevOps"
           description="DevOps services that streamline software delivery through automation and monitoring."
@@ -83,6 +87,8 @@ const CloudServices = () => {
         />
 
         <CloudCard
+          data-aos="fade-up"
+          data-aos-delay="300"
           icon={bigDataIcon}
           title="Big Data"
           description="Big data solutions for analytics, warehousing, and data-driven decisions."

@@ -257,7 +257,36 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
   animation: fadeIn 0.6s ease-in forwards;
 }
 
+/* Mobile Navigation Item Styling */
+.nav-mobile {
+  @apply w-full text-left px-4 py-2.5 rounded-lg text-slate-700 font-medium transition-all duration-200 border-none bg-transparent hover:bg-sky-50 hover:text-drcloudBlue;
+  display: block;
+  cursor: pointer;
+}
+
+.nav-mobile:active {
+  @apply bg-sky-100;
+}
+
 @media (max-width: 768px) {
+  /* Mobile Header Optimizations */
+  header {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  header img {
+    height: 2.5rem !important;
+  }
+
+  header nav {
+    gap: 0 !important;
+  }
+
+  header .drcloud-container {
+    gap: 0.5rem !important;
+  }
+
   html,
   body,
   #root {
@@ -290,8 +319,8 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
     bottom: 1rem !important;
     width: auto !important;
     max-width: calc(100vw - 2rem) !important;
-    height: auto !important;
-    max-height: calc(100vh - 2rem) !important;
+    height: 520px !important;
+    max-height: 520px !important;
   }
 
   .aos-init {
@@ -447,3 +476,57 @@ button:not(.drcloud-pill-primary):not(.drcloud-pill-outline):hover {
   opacity: 1;
 }
 
+/* placed scroll */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+/* what thwy say  */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 25s linear infinite;
+}
+
+
+/* csr image */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* mobile scrollnig  */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Adjust based on navbar height */
+section {
+  scroll-margin-top: 100px;
+}

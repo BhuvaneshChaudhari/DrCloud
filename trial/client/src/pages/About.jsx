@@ -1,42 +1,44 @@
+import React from "react";
+
 const pillars = [
   {
-    title: 'Mission-Driven',
+    title: "Mission-Driven",
     body:
       "We're committed to bridging the skills gap in cloud computing and helping professionals excel in the digital transformation era."
   },
   {
-    title: 'Community Focus',
+    title: "Community Focus",
     body:
-      'Building a supportive learning community where students and instructors collaborate and grow together.'
+      "Building a supportive learning community where students and instructors collaborate and grow together."
   },
   {
-    title: 'Innovation First',
+    title: "Innovation First",
     body:
-      'We stay ahead of industry trends, constantly updating our curriculum with the latest technologies and best practices.'
+      "We stay ahead of industry trends, constantly updating our curriculum with the latest technologies and best practices."
   },
   {
-    title: 'Career Growth',
+    title: "Career Growth",
     body:
-      'Our programs are designed to accelerate career advancement with practical skills that employers value.'
+      "Our programs are designed to accelerate career advancement with practical skills that employers value."
   }
 ];
 
 const testimonials = [
   {
-    name: 'Atharva Gawali',
-    company: 'Johnson Controls Placement',
+    name: "Atharva Gawali",
+    company: "Johnson Controls Placement",
     quote:
       "DrCloud's expert training and placement support helped me land a position at Johnson Controls, a global leader in smart building technologies and automation. The hands-on skills, mentorship, and industry connections gave me the confidence to excel at interviews and adapt quickly in my professional role."
   },
   {
-    name: 'Raunak',
-    company: 'TalenIQ Placement',
+    name: "Raunak",
+    company: "TalenIQ Placement",
     quote:
       "DrCloud's practical cloud and DevOps training made a real difference in my career journey. Thanks to expert guidance and focused placement support, I was placed at TalenIQ, a fast-growing company redefining employability through digital solutions."
   },
   {
-    name: 'Trupti Wankhede',
-    company: 'Johnson Controls Placement',
+    name: "Trupti Wankhede",
+    company: "Johnson Controls Placement",
     quote:
       "Thanks to DrCloud's comprehensive training and dedicated placement support, I secured my role at Johnson Controls, a global leader in smart building technologies and sustainable solutions."
   }
@@ -44,7 +46,10 @@ const testimonials = [
 
 const About = () => {
   return (
-    <div className="drcloud-container py-10 md:py-14 space-y-12" data-aos="fade-up">
+    <div
+      className="drcloud-container py-10 md:py-14 space-y-12"
+      data-aos="fade-up"
+    >
       <section className="space-y-4 text-center">
         <h2 className="text-2xl md:text-3xl font-semibold text-slate-900">
           About DrCloud
@@ -85,13 +90,18 @@ const About = () => {
 
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="drcloud-card px-5 py-6 flex flex-col justify-between">
+            <div
+              key={t.name}
+              className="drcloud-card px-5 py-6 flex flex-col justify-between"
+            >
               <p className="text-sm text-slate-600 mb-4">{t.quote}</p>
               <div className="mt-auto">
                 <div className="text-sm font-semibold text-slate-900">
                   {t.name}
                 </div>
-                <div className="text-xs text-drcloudBlue">{t.company}</div>
+                <div className="text-xs text-drcloudBlue">
+                  {t.company}
+                </div>
               </div>
             </div>
           ))}
@@ -102,4 +112,3 @@ const About = () => {
 };
 
 export default About;
-
