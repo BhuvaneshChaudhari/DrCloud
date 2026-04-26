@@ -34,7 +34,6 @@ const PlacedCompanies = () => {
             className="
               h-6 md:h-8
               object-contain
-              grayscale opacity-60
               hover:grayscale-0 hover:opacity-100 hover:scale-110
               transition duration-300 ease-in-out
             "

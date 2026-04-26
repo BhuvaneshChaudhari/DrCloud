@@ -20,9 +20,25 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    // Refresh AOS to re-trigger animations after scroll
-    setTimeout(() => AOS.refresh(), 100);
+    const isMobile = window.innerWidth < 768;
+  
+    if (isMobile) {
+      const root = document.getElementById('root');
+      if (root) root.scrollTop = 0;
+      window.scrollTo(0, 0);
+      setTimeout(() => AOS.refresh(), 100);
+    } else {
+      // Hide main content, scroll, then reveal and animate
+      const main = document.querySelector('main');
+      if (main) main.style.visibility = 'hidden';
+  
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  
+      setTimeout(() => {
+        if (main) main.style.visibility = 'visible';
+        AOS.refreshHard();
+      }, 50);
+    }
   }, [pathname]);
 
   return null;
@@ -30,13 +46,13 @@ const ScrollToTop = () => {
 
 
 const App = () => {
-  const location = useLocation();
+  
 
   // ✅ Initialize AOS once
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true,
+      once: false,
       easing: 'ease-in-out',
     });
     // Prevent browser scroll restoration and ensure start at top
@@ -44,10 +60,6 @@ const App = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, []);
 
-  // ✅ Refresh AOS on route change
-  useEffect(() => {
-    AOS.refresh();
-  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">

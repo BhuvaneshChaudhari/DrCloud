@@ -59,19 +59,37 @@ const Navbar = () => {
   }, [isHome]);
 
   const goToSection = (section) => {
-    setMobileMenuOpen(false);
-    if (isHome && hash === `#${section}`) {
-      const el = document.getElementById(section);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        if (isHome) {
+          const el = document.getElementById(section);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          navigate(`/#${section}`);
+          setTimeout(() => {
+            const el = document.getElementById(section);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 800);
+        }
+      }, 300);
     } else {
-      navigate(`/#${section}`);
+      if (isHome && hash === `#${section}`) {
+        const el = document.getElementById(section);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        navigate(`/#${section}`);
+      }
     }
   };
-
   const handleHomeClick = () => {
     setMobileMenuOpen(false);
     navigate('/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      const root = document.getElementById('root');
+      if (root) root.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   const handleGetStarted = () => {
