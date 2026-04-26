@@ -209,8 +209,12 @@ const Enquiry = () => {
                 type="tel"
                 name="phone"
                 value={form.phone}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setForm(prev => ({ ...prev, phone: val }));
+                }}
                 required
+                maxLength={10}
                 className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-drcloudBlue/40"
               />
             </div>
