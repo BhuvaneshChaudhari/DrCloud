@@ -10,13 +10,14 @@ const translations = {
   en: {
     quickReplies: {
       services: "Browse Services",
-
+      csr: "CSR Project",
       enquiry: "Enquiry Form",
       contact: "Contact Us",
       changeLanguage: "Change Language"
     },
     responses: {
       services: "We offer multiple services including training, cloud solutions, and other IT services. Please choose the service you are interested in.",
+      csr: "🌱 DrCloud's CSR initiative focuses on empowering underprivileged communities through free cloud & tech education. We partner with NGOs and run programs like AWS re/Start to create real career opportunities. Redirecting you to our CSR page...",
       enquiry: "You can submit your details using the enquiry form below and our team will contact you shortly.",
       contact: "You can reach us using the contact information on the Contact page or by submitting the enquiry form.",
       backToMain: "No problem! Here's what else I can help you with. 😊",
@@ -57,12 +58,14 @@ const translations = {
   hi: {
     quickReplies: {
       services: "सेवाएँ देखें",
+      csr: "सीएसआर परियोजना",
       enquiry: "पूछताछ फॉर्म",
       contact: "संपर्क करें",
       changeLanguage: "भाषा बदलें"
     },
     responses: {
       services: "हम प्रशिक्षण, क्लाउड समाधान और अन्य आईटी सेवाएँ प्रदान करते हैं। कृपया वह सेवा चुनें जिसमें आप रुचि रखते हैं।",
+      csr: "🌱 DrCloud की सीएसआर पहल तकनीकी शिक्षा के माध्यम से वंचित समुदायों को सशक्त बनाने पर केंद्रित है। हम AWS re/Start जैसे कार्यक्रम चलाते हैं। आपको हमारे सीएसआर पेज पर ले जा रहे हैं...",
       enquiry: "आप नीचे दिए गए पूछताछ फॉर्म में अपनी जानकारी भर सकते हैं और हमारी टीम आपसे जल्द संपर्क करेगी।",
       contact: "आप संपर्क पेज पर दी गई जानकारी का उपयोग करके हमसे संपर्क कर सकते हैं या पूछताछ फॉर्म भर सकते हैं।",
       backToMain: "कोई बात नहीं! मैं और किस चीज़ में आपकी मदद कर सकता हूँ? 😊",
@@ -86,10 +89,11 @@ const translations = {
 
   mr: {
     quickReplies: {
-      services: "सेवा पहा", enquiry: "चौकशी फॉर्म", contact: "संपर्क करा", changeLanguage: "भाषा बदला"
+      services: "सेवा पहा", csr: "सीएसआर प्रकल्प", enquiry: "चौकशी फॉर्म", contact: "संपर्क करा", changeLanguage: "भाषा बदला"
     },
     responses: {
       services: "आम्ही प्रशिक्षण, क्लाउड सोल्युशन्स आणि इतर आयटी सेवा प्रदान करतो. कृपया तुम्हाला हवी असलेली सेवा निवडा.",
+      csr: "🌱 DrCloud च्या CSR उपक्रमात तंत्रज्ञान शिक्षणाद्वारे वंचित समुदायांना सक्षम केले जाते. AWS re/Start सारखे कार्यक्रम राबवतो. तुम्हाला CSR पेजवर घेऊन जात आहे...",
       enquiry: "तुम्ही खाली दिलेल्या चौकशी फॉर्ममध्ये तुमची माहिती भरू शकता आणि आमची टीम लवकरच तुमच्याशी संपर्क साधेल.",
       contact: "तुम्ही संपर्क पेजवरील माहिती वापरून आमच्याशी संपर्क करू शकता किंवा चौकशी फॉर्म भरू शकता.",
       backToMain: "काही हरकत नाही! मी तुम्हाला आणखी कशी मदत करू शकतो? 😊",
@@ -114,6 +118,7 @@ const translations = {
 
 const quickReplies = [
   { id: 'services' },
+  { id: 'csr' },
   { id: 'enquiry' },
   { id: 'contact' },
   { id: 'changeLanguage' }
@@ -196,6 +201,7 @@ const Chatbot = () => {
 
   const responseMap = useMemo(() => ({
     services: { text: t.responses.services, navigateTo: '/#services' },
+    csr: { text: t.responses.csr, navigateTo: '/csr' },
     enquiry: { text: t.responses.enquiry },
     contact: { text: t.responses.contact, navigateTo: '/#contact' }
   }), [t]);
