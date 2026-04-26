@@ -13,7 +13,7 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: ["https://drcloud-phi.vercel.app", "http://localhost:5173"],
+    origin: ["https://dr-cloud-tan.vercel.app/", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
