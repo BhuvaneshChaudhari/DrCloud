@@ -60,18 +60,23 @@ router.post('/', async (req, res) => {
     });
     await db.write();
 
-    const transporter = createTransporter();
-    const { subject, text, html } = buildEnquiryEmail(enquiry);
+    try {
+      const transporter = createTransporter();
+      const { subject, text, html } = buildEnquiryEmail(enquiry);
+      await transporter.sendMail({
+        from: process.env.SMTP_FROM,
+        to: process.env.NOTIFY_EMAIL_TO || process.env.SMTP_FROM,
+        subject,
+        text,
+        html
+      });
+    } catch (mailError) {
+      console.error('Email failed (enquiry still saved):', mailError.message);
+    }
 
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM,
-      to: process.env.NOTIFY_EMAIL_TO || process.env.SMTP_FROM,
-      subject,
-      text,
-      html
-    });
+return res.status(201).json({ message: 'Enquiry submitted successfully.' });
 
-    return res.status(201).json({ message: 'Enquiry submitted successfully.' });
+    
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error handling enquiry:', error);
