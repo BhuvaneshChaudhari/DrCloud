@@ -195,9 +195,9 @@ const Chatbot = () => {
   };
 
   const responseMap = useMemo(() => ({
-    services: { text: t.responses.services, navigateTo: '/services' },
+    services: { text: t.responses.services, navigateTo: '/#services' },
     enquiry: { text: t.responses.enquiry },
-    contact: { text: t.responses.contact, navigateTo: '/contact' }
+    contact: { text: t.responses.contact, navigateTo: '/#contact' }
   }), [t]);
 
   const handleQuickReply = (id) => {
@@ -238,7 +238,7 @@ const Chatbot = () => {
           navigate(config.navigateTo);
           if (window.innerWidth < 768) {
             setTimeout(() => {
-              const section = config.navigateTo.replace('/', '');
+              const section = config.navigateTo.replace('/#', '');
               const el = document.getElementById(section);
               if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 800);

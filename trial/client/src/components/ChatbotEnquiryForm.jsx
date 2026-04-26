@@ -35,7 +35,7 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       setSubmitting(true);
 
@@ -49,14 +49,14 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
 
 
       // ✅ REAL API CALL
-      await apiClient.post("/api/chat-enquiry", payload); 
-  
+      await apiClient.post("/api/chat-enquiry", payload);
+
       setStatus("success");
       setForm(initialState);
 
 
       if (onSuccess) onSuccess();
-  
+
     } catch {
       setStatus("error");
     } finally {
@@ -97,8 +97,12 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
             type="tel"
             name="phone"
             value={form.phone}
-            onChange={handleChange}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+              setForm(prev => ({ ...prev, phone: val }));
+            }}
             required
+            maxLength={10}
             className="cf-input"
           />
         </div>
@@ -131,7 +135,7 @@ const ChatbotEnquiryForm = ({ onCancel, onSuccess, t }) => {
         </div>
 
         {status === "success" && <div className="cf-success">✅ {t.form.success}</div>}
-        {status === "error"   && <div className="cf-error">❌ {t.form.error}</div>}
+        {status === "error" && <div className="cf-error">❌ {t.form.error}</div>}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', animation: 'fieldIn 0.35s ease 240ms both' }}>
           <button type="submit" disabled={submitting} className="cf-submit-btn">

@@ -132,12 +132,7 @@ const Home = () => {
   const { ref: statsRef, inView: statsInView } = useInView({ triggerOnce: true, rootMargin: "-100px 0px" });
 
   //  FIX 1: scroll to top on page load
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {

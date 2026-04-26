@@ -20,8 +20,9 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    // Refresh AOS to re-trigger animations after scroll
+    const root = document.getElementById('root');
+    if (root) root.scrollTop = 0;
+    window.scrollTo(0, 0);
     setTimeout(() => AOS.refresh(), 100);
   }, [pathname]);
 
