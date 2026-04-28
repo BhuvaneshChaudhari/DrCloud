@@ -188,16 +188,21 @@ const Footer = () => {
               </svg>
               <span>+91-842-115-0803</span>
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-start gap-2">
               <svg
-                className="w-4 h-4 text-slate-700 transition-transform duration-300 hover:scale-110"
+                className="w-5 h-5 flex-shrink-0 text-slate-700 mt-1 transition-transform duration-300 hover:scale-110"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
+                role="img"
+                title="Location"
               >
                 <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z" />
               </svg>
-              <span>Pune, Maharashtra 411044</span>
+              <span className="text-sm leading-tight">
+                7th floor, Gera's Imperium Gateway, B712/A, near Nashik Phata Metro Station,
+                Bhosari, Pimpri-Chinchwad, Maharashtra 411034
+              </span>
             </li>
           </ul>
         </div>
