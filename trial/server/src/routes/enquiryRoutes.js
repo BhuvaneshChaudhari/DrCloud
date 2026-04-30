@@ -2,7 +2,7 @@ import express from 'express';
 import xss from 'xss';
 import validator from 'validator';
 import Enquiry from '../models/Enquiry.js';
-import { createTransporter, buildEnquiryEmail } from '../config/email.js';
+import { sendEnquiryEmail } from '../config/email.js';
 import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 
@@ -63,27 +63,10 @@ router.post('/', async (req, res) => {
     console.log('Step 2: DB write done');
 
     try {
-  console.log('Step 3: Creating transporter');
-  const transporter = createTransporter();
-  console.log('Step 4: Transporter created');
-  const { subject, text, html } = buildEnquiryEmail(enquiry);
-  
-  await Promise.race([
-    transporter.sendMail({
-      from: process.env.SMTP_FROM,
-      to: process.env.NOTIFY_EMAIL_TO || process.env.SMTP_FROM,
-      subject,
-      text,
-      html
-    }),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Email timeout after 15s')), 15000)
-    )
-  ]);
-  
+  await sendEnquiryEmail(enquiry);
   console.log('Step 5: Email sent');
 } catch (mailError) {
-  console.error('Email failed - Full error:', mailError);
+  console.error('Email failed:', mailError);
 }
     
     return res.status(201).json({ message: 'Enquiry submitted successfully.' });
