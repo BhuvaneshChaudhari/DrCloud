@@ -11,6 +11,7 @@ const router = express.Router();
 const sanitize = (value) => xss(value?.toString().trim() || '');
 
 router.post('/', async (req, res) => {
+  console.log('Step 1: Route hit');
   try {
     const raw = req.body || {};
 
@@ -59,9 +60,12 @@ router.post('/', async (req, res) => {
       createdAt: enquiry.createdAt
     });
     await db.write();
+    console.log('Step 2: DB write done');
 
     try {
+      console.log('Step 3: Creating transporter');
       const transporter = createTransporter();
+      console.log('Step 4: Transporter created');
       const { subject, text, html } = buildEnquiryEmail(enquiry);
       await transporter.sendMail({
         from: process.env.SMTP_FROM,
@@ -70,11 +74,12 @@ router.post('/', async (req, res) => {
         text,
         html
       });
+      console.log('Step 5: Email sent successfully');
     } catch (mailError) {
       console.error('Email failed (enquiry still saved):', mailError.message);
     }
-
-return res.status(201).json({ message: 'Enquiry submitted successfully.' });
+    
+    return res.status(201).json({ message: 'Enquiry submitted successfully.' });
 
     
   } catch (error) {
