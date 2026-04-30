@@ -21,7 +21,8 @@ export const createTransporter = () => {
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS
-    }
+    },
+    family: 4 // Use IPv4
   });
 
   return transporter;
