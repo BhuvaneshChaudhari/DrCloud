@@ -22,7 +22,11 @@ export const createTransporter = () => {
       user: SMTP_USER,
       pass: SMTP_PASS
     },
-    family: 4 // Use IPv4
+    family: 4,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+    pool: false
   });
 
   return transporter;
