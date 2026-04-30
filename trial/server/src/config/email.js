@@ -1,71 +1,24 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-export const createTransporter = () => {
-  const {
-    SMTP_HOST,
-    SMTP_PORT,
-    SMTP_USER,
-    SMTP_PASS,
-    SMTP_SECURE,
-    SMTP_FROM
-  } = process.env;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-    throw new Error('SMTP configuration is incomplete');
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: SMTP_SECURE === 'true',
-    auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS
-    },
-    family: 4,
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
-    pool: false
-  });
-
-  return transporter;
-};
-
-export const buildEnquiryEmail = (payload) => {
+export const sendEnquiryEmail = async (payload) => {
   const { name, email, phone, serviceType, message, createdAt } = payload;
 
-  const subject = 'New Enquiry Received – DrCloud Website';
-
-  const text = [
-    'A new enquiry has been submitted on the DrCloud website.',
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Phone: ${phone}`,
-    `Service: ${serviceType}`,
-    '',
-    'Message:',
-    message,
-    '',
-    `Timestamp: ${createdAt.toISOString()}`
-  ].join('\n');
-
-  const html = `
-    <p>A new enquiry has been submitted on the <strong>DrCloud</strong> website.</p>
-    <p>
-      <strong>Name:</strong> ${name}<br/>
-      <strong>Email:</strong> ${email}<br/>
-      <strong>Phone:</strong> ${phone}<br/>
-      <strong>Service:</strong> ${serviceType}<br/>
-      <strong>Timestamp:</strong> ${createdAt.toISOString()}
-    </p>
-    <p>
-      <strong>Message:</strong><br/>
-      ${message.replace(/\n/g, '<br/>')}
-    </p>
-  `;
-
-  return { subject, text, html };
+  await resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: process.env.NOTIFY_EMAIL_TO,
+    subject: 'New Enquiry Received | DrCloud Website',
+    html: `
+      <p>A new enquiry has been submitted on the <strong>DrCloud</strong> website.</p>
+      <p>
+        <strong>Name:</strong> ${name}<br/>
+        <strong>Email:</strong> ${email}<br/>
+        <strong>Phone:</strong> ${phone}<br/>
+        <strong>Service:</strong> ${serviceType}<br/>
+        <strong>Timestamp:</strong> ${createdAt.toISOString()}
+      </p>
+      <p><strong>Message:</strong><br/>${message}</p>
+    `
+  });
 };
-
