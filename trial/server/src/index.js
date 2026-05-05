@@ -10,7 +10,6 @@ import chatEnquiryRoutes from './routes/chatEnquiryRoutes.js';
 
 const app = express();
 
-app.use(helmet());
 app.use(
   cors({
     origin: ["https://dr-cloud-tan.vercel.app", 
@@ -23,6 +22,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(helmet());
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
